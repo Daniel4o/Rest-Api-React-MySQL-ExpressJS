@@ -1,5 +1,5 @@
 const express = require('express');
-const MatchStatistics = require('../controllers/matchStatistics.controller');
+const MatchStatistics = require('../controllers/matchesStatistics.controller');
 const router = express.Router();
 
 router.get("/", MatchStatistics.getMatchesStatistics);

@@ -8,7 +8,7 @@ const teamsRouter = require('./routes/teamsRoute');
 const playersRouter = require('./routes/playersRoute');
 const teamPlayersRouter = require('./routes/teamPlayersRoute');
 const resultsRouter = require('./routes/resultsRoute');
-const matchesStatistics = require('./routes/matchStatistics');
+const matchesStatistics = require('./routes/matchesStatisticsRoute');
 
 app.use(cors())
 app.use(express.json());
@@ -16,7 +16,7 @@ app.use('/results', resultsRouter);
 app.use('/teams', teamsRouter);
 app.use('/players', playersRouter);
 app.use('/team-players', teamPlayersRouter);
-app.use('/matches-statistics',matchesStatistics);
+app.use('/matches-statistics', matchesStatistics);
 app.use((req, res) => {
     res.status(404).send("Page not found");
 })

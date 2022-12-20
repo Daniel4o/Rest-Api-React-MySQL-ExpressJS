@@ -12,12 +12,21 @@ const matchStatistics = (sequelize, DataTypes) => {
             validate: {
                 notNull: { msg: "You need to provide team_id !" }
             },
-            references: { model: "teams", key: "id" }
+            references: { model: "results", key: "host_id" },
+        },
+        player_id: {
+            type: DataTypes.INTEGER, allowNull: false,
+            validate: {
+                notNull: { msg: "You need to provide player_id!" }
+            },
+            references: { model: "players", key: "id" }
         },
         minute: {
             type: DataTypes.INTEGER, allowNull: false,
             validate: {
-                notNull: { msg: "You need to provide minute!" }
+                notNull: { msg: "You need to provide minute!" },
+                min: 1,
+                max: 90
             }
         },
         event: {
@@ -25,7 +34,7 @@ const matchStatistics = (sequelize, DataTypes) => {
             validate: {
                 notNull: { msg: "You need to provide event !" }
             }
-        }
+        },
     },
         {
             timestamps: false,
@@ -35,16 +44,24 @@ const matchStatistics = (sequelize, DataTypes) => {
 
     MatchStatistics.associate = models => {
         MatchStatistics.belongsTo(models.results, {
-            as: "host",
-            foreignKey: "team_id",
-            sourceKey: "host_id"
+            as: "results",
+            foreignKey: "result_id",
+            sourceKey: "id"
         });
-        MatchStatistics.belongsTo(models.results, {
-            as: "guest",
+
+        MatchStatistics.belongsTo(models.teams, {
+            as: "teams",
             foreignKey: "team_id",
-            sourceKey: "guest_id"
+            sourceKey: "id"
+        });
+
+        MatchStatistics.belongsTo(models.results, {
+            as: "players",
+            foreignKey: "player_id",
+            sourceKey: "id"
         });
     }
+
     MatchStatistics.sync();
     return MatchStatistics;
 }
