@@ -1,0 +1,12 @@
+.center {
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  height:100vh;
+  margin-top: 20px;
+}

@@ -57,6 +57,7 @@ const Results = () => {
               <td>{result.venue}</td>
               <td>
                 <ButtonGroup>
+                  <Link to={`/Matches-Statistics/${result.id}`} className='link'>View</Link>
                   <Link to={`/Results/edit/${result.id}`} className='edit'>Edit</Link>
                   <Button variant='danger' onClick={() => deleteResult(result.id)}>Delete</Button>
                 </ButtonGroup>

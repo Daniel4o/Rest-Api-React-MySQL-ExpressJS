@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Teams from './components/teams/Teams'
+import Teams from './components/teams/Teams';
 import AddTeam from './components/teams/AddTeam';
 import EditTeam from './components/teams/EditTeam';
 import Players from './components/players/Players';
@@ -12,7 +12,9 @@ import Team from './components/teams/GetTeam';
 import TeamPlayers from './components/teamPlayers/MainTeamPlayers';
 import TeamPlayersById from './components/teamPlayers/TeamPlayersById';
 import HomePage from './components/homePage/homePage';
-import Layout from './components/homePage/layout/Layout'
+import Layout from './components/homePage/layout/Layout';
+import MatchesStatistics from './components/matchesStatistics/MatchesStatistics';
+
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
 
           <Route path='/Team-Players/' element={<TeamPlayers />} />
           <Route path='/Team-Players/:id' element={<TeamPlayersById />} />
+          
+          <Route path='/Matches-Statistics/:id' element={<MatchesStatistics />} />
         </Routes>
       </Layout>
     </Router>
