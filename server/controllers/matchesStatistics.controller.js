@@ -29,11 +29,40 @@ exports.getMatchesStatistics = async (req, res) => {
 exports.getMatchStatisticsByResultId = async (req, res) => {
     try {
         const { id } = req.params;
+        let currGoalsHost = 0;
+        let currGoalsGuest = 0;
         const matches_statistics = await MatchStatistics.findAll({
             where: { result_id: id },
-            raw: true
+            raw: true,
+            include: [{
+                model: models.players,
+                as: "players",
+            },
+            {
+                model: models.results,
+                as: "results"
+            }]
         });
-        console.log(matches_statistics)
+
+
+        matches_statistics.forEach(matchStatistic => {
+            if (matchStatistic.team_id == matchStatistic["results.host_id"]) {
+                matchStatistic.hostPlayer = matchStatistic["players.name"];
+                matchStatistic.hostEvent = matchStatistic.event;
+                matchStatistic.spanGuest = 2;
+                if (matchStatistic.event == "Goal") currGoalsHost++;
+            }
+            else {
+                matchStatistic.guestPlayer = matchStatistic["players.name"];
+                matchStatistic.guestEvent = matchStatistic.event;
+                matchStatistic.spanHost = 2;
+                if (matchStatistic.event == "Goal") currGoalsGuest++;
+            }
+            matchStatistic.currResult = currGoalsHost + "-" + currGoalsGuest
+        });
+
+        matches_statistics.sort((a,b) => a.minute-b.minute)
+
         return res.send(matches_statistics);
     } catch (error) {
         return res.send(error).status(500);

@@ -10,3 +10,14 @@
   height:100vh;
   margin-top: 20px;
 }
+
+a.addButton:link, a.addButton:visited {
+    background-color: #cc2062;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: absolute;
+  
+}

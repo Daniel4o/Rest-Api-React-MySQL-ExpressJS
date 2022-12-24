@@ -55,7 +55,7 @@ const matchStatistics = (sequelize, DataTypes) => {
             sourceKey: "id"
         });
 
-        MatchStatistics.belongsTo(models.results, {
+        MatchStatistics.belongsTo(models.players, {
             as: "players",
             foreignKey: "player_id",
             sourceKey: "id"

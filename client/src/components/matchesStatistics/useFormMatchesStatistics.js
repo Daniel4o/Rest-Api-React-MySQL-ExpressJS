@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const useFormMatchesStatistics = () => {
-  const BASE_URL = process.env.REACT_APP_URL
+  const BASE_URL = process.env.REACT_APP_URL;
 
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -11,34 +11,33 @@ const useFormMatchesStatistics = () => {
 
   useEffect(async () => {
     try {
-      const response = await fetch(`${BASE_URL}/matches-statistics/${id}`)
+      const response = await fetch(`${BASE_URL}/matches-statistics/${id}`);
       return response.json()
         .then(data => {
-          setMatchesStatistics(data)
-          setError(null)
-          setIsLoading(false)
+          setMatchesStatistics(data);
+          setError(null);
+          setIsLoading(false);
         })
     } catch (error) {
-        setError(error)
-        setIsLoading(false)
+      setError(error);
+      setIsLoading(false);
     }
   }, [BASE_URL]);
 
-
-  const deleteMatchStatistics = async (id) => {
+  const deleteMatchStatistic = async (id) => {
     try {
       await fetch(`${BASE_URL}/matches-statistics/${id}`, {
         method: "DELETE",
       }).then(response => {
         setMatchesStatistics(matchesStatistics.filter(matchStatistics => matchStatistics.id !== id))
-        return response.json()
+        return response.json();
       })
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
   }
 
-  return {matchesStatistics, error, deleteMatchStatistics, isLoading}
+  return { matchesStatistics, error, deleteMatchStatistic, isLoading };
 }
 
-export default useFormMatchesStatistics
+export default useFormMatchesStatistics;
