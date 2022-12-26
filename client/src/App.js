@@ -14,7 +14,7 @@ import TeamPlayersById from './components/teamPlayers/TeamPlayersById';
 import HomePage from './components/homePage/homePage';
 import Layout from './components/homePage/layout/Layout';
 import MatchesStatistics from './components/matchesStatistics/MatchesStatistics';
-
+import AddMatchStatistic from './components/matchesStatistics/AddMatchStatistic';
 
 function App() {
   return (
@@ -38,8 +38,9 @@ function App() {
 
           <Route path='/Team-Players/' element={<TeamPlayers />} />
           <Route path='/Team-Players/:id' element={<TeamPlayersById />} />
-          
+
           <Route path='/Matches-Statistics/:id' element={<MatchesStatistics />} />
+          <Route path='/Matches-Statistics/add/:id' element={<AddMatchStatistic />} />
         </Routes>
       </Layout>
     </Router>

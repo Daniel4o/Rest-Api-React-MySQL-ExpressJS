@@ -1,5 +1,6 @@
 const models = require("../models")
 const Results = models.results
+const Players = models.players
 
 exports.getResults = async (req, res) => {
     try {
@@ -36,8 +37,42 @@ exports.getResults = async (req, res) => {
 
 exports.getResultById = async (req, res) => {
     try {
-        const result = await Results.findByPk(req.params.id);
-        res.send(result)
+        const result = await Results.findByPk(req.params.id, {
+            raw: true,
+            include: [{
+                model: models.teams,
+                as: "host",
+                paranoid: false,
+            },
+            {
+                model: models.teams,
+                as: "guest",
+                paranoid: false
+            }]
+        });
+        console.log()
+
+        const hostPlayers = await Players.findAll({
+            where: { teamId: result.host_id },
+            raw: true,
+            include: [{
+                model:models.teams,
+                as:"teams"
+            }]
+        });
+
+        const guestPlayers = await Players.findAll({
+            where: { teamId: result.guest_id },
+            raw: true,
+            include: [{
+                model:models.teams,
+                as: "teams"
+            }]
+        });
+
+        const players = hostPlayers.concat(guestPlayers);
+
+        res.send({ result, players });
     } catch (error) {
         return res.send(error)
     }

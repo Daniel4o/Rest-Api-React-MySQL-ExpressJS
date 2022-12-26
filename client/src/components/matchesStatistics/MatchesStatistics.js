@@ -5,7 +5,7 @@ import useFormMatchesStatistics from "./useFormMatchesStatistics";
 import "./MatchesStatistics.css"
 
 const MatchesStatistics = () => {
-  const { matchesStatistics, isLoading, error, deleteMatchStatistic } = useFormMatchesStatistics();
+  const { matchesStatistics, finalResult, id, teamNames, isLoading, error, deleteMatchStatistic } = useFormMatchesStatistics();
   if (isLoading) {
     return (<Spinner animation="border" variant="primary" />)
   }
@@ -28,16 +28,26 @@ const MatchesStatistics = () => {
     }
   }
 
+  const showResult = (hostEvent, guestEvent, result) => {
+    if (hostEvent == "Goal" || guestEvent == "Goal") return result;
+    return null;
+  }
+
   return (
     <Container className="content">
+      <Row className='text-white bg-dark'>
+        <Col className="finalResult">
+          <h3>{teamNames[0]}&ensp;{finalResult}&ensp;{teamNames[1]}</h3>
+        </Col>
+      </Row>
       {matchesStatistics.map(statistic => (
         <Row className='text-white bg-dark' >
           <Col md={{ span: 2 }}>{statistic.minute}'</Col>
-          <Col >{statistic.hostPlayer}</Col>
-          <Col >{checkEvent(statistic.hostEvent)}</Col>
-          <Col >{statistic.currResult}</Col>
-          <Col >{checkEvent(statistic.guestEvent)}</Col>
-          <Col >{statistic.guestPlayer}</Col>
+          <Col>{statistic.hostPlayer}</Col>
+          <Col>{checkEvent(statistic.hostEvent)}</Col>
+          <Col>{showResult(statistic.hostEvent, statistic.guestEvent, statistic.currResult)}</Col>
+          <Col>{checkEvent(statistic.guestEvent)}</Col>
+          <Col>{statistic.guestPlayer}</Col>
           <Col>
             <Link to={`/matches-statistics/edit/${statistic.id}`} className='edit'>Edit</Link>
           </Col>
@@ -46,7 +56,7 @@ const MatchesStatistics = () => {
           </Col>
         </Row>
       ))}
-      <Button variant="primary" href="/matches-statistics/add">Add New</Button>
+      <Link className="addButton" to={`/matches-statistics/add/${id}`}>Add New</Link>
     </Container>
   )
 }
