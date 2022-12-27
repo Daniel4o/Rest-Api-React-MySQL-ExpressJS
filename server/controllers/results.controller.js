@@ -1,6 +1,7 @@
 const models = require("../models")
 const Results = models.results
 const Players = models.players
+const MatchesStatistics = models.matches_statistics
 
 exports.getResults = async (req, res) => {
     try {
@@ -37,6 +38,7 @@ exports.getResults = async (req, res) => {
 
 exports.getResultById = async (req, res) => {
     try {
+        const { id } = req.params;
         const result = await Results.findByPk(req.params.id, {
             raw: true,
             include: [{
@@ -50,14 +52,13 @@ exports.getResultById = async (req, res) => {
                 paranoid: false
             }]
         });
-        console.log()
 
         const hostPlayers = await Players.findAll({
             where: { teamId: result.host_id },
             raw: true,
             include: [{
-                model:models.teams,
-                as:"teams"
+                model: models.teams,
+                as: "teams"
             }]
         });
 
@@ -65,14 +66,25 @@ exports.getResultById = async (req, res) => {
             where: { teamId: result.guest_id },
             raw: true,
             include: [{
-                model:models.teams,
+                model: models.teams,
                 as: "teams"
             }]
         });
 
-        const players = hostPlayers.concat(guestPlayers);
+        const matchesStatistics = await MatchesStatistics.findAll({
+            where: { result_id: id },
+            raw: true,
+            inlucde: [{
+                model: models.results,
+                as: "results"
+            }]
+        });
 
-        res.send({ result, players });
+        const redCardedPlayers = matchesStatistics.filter(match=>match.event == "Red Card").map(player=>player.player_id);
+
+        const players = hostPlayers.concat(guestPlayers).filter(player=>!redCardedPlayers.includes(player.id));
+
+        res.send({ result, players, matchesStatistics });
     } catch (error) {
         return res.send(error)
     }

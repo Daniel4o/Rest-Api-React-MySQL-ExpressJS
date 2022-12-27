@@ -6,12 +6,8 @@ import './MatchesStatistics.css';
 import { useState } from 'react';
 
 const AddMatchStatistic = (submitForm) => {
-    const { initialValues, result, error, isLoading, validationSchema, onSubmit } = useFormAddMatchStatistic(submitForm)
-   const [teamSelected,setTeamSelected] = useState("");
-   
-    const changeSelectedTeam= (event) => {
-        setTeamSelected(event.target.value);
-    }
+    const [teamSelected, setTeamSelected] = useState("");
+    const { initialValues, result, error, isLoading, validationSchema, onSubmit } = useFormAddMatchStatistic(submitForm);
 
     if (isLoading) {
         return (<Spinner animation="border" variant="primary" />)
@@ -19,16 +15,6 @@ const AddMatchStatistic = (submitForm) => {
     if (error) {
         return <div>There was an error: {error}</div>
     }
-    
-    let players = null;
-    if(teamSelected == result.result["host.team_name"]) {
-        players = result["hostPlayers"].map((players)=><option key={players.name} value={players.name}>{players.name}</option>)
-    }
-    if(teamSelected == result.result["guest.team_name"]) {
-        players = result["guestPlayers"].map((players)=><option key={players.name} value={players.name}>{players.name}</option>)
-    }
-    
-
 
     return (
         <div className="addMatchStatistic">
@@ -42,67 +28,72 @@ const AddMatchStatistic = (submitForm) => {
                         <Form.Group>
                             <Form.Label>Team:</Form.Label>
                             <Form.Select
-                                id="inputAddMatchStatistic"
+                                id="team_name"
                                 name="team_name"
-                                onChange={handleChange}
+                                onChange={e => {
+                                    const { value } = e.target;
+                                    setTeamSelected(value);
+                                }}
                                 onBlur={handleBlur}
-                                value={values.team_name}
+                                value={values.team_name = teamSelected}
                                 isInvalid={!!errors.team_name}
                             >
                                 <option label='Select Team'></option>
-                                <option key={result.result} value={result.result}>{result.result["host.team_name"]}</option>
-                                <option key={result.result} value={result.result}>{result.result["guest.team_name"]}</option>
-                            <ErrorMessage name="team_name" component="span" />
+                                <option key={result.result["host_id"]} value={result.result["host.team_name"]}>{result.result["host.team_name"]}</option>
+                                <option key={result.result["guest_id"]} value={result.result["guest.team_name"]}>{result.result["guest.team_name"]}</option>
                             </Form.Select>
+                            <ErrorMessage name="team_name" component="span" />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Event:</Form.Label>
                             <Form.Select
-                                id="inputAddMatchStatistic"
+                                id="event"
                                 name="event"
                                 onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.event}
-                                isInvalid={!!errors.event}
                             >
                                 <option label='Select Event'></option>
-                                <option>Goal</option>
-                                <option>Penalty</option>
-                                <option>Yellow Card</option>
-                                <option>Red Card</option>                           
-                                 </Form.Select>
+                                <option value="Goal">Goal</option>
+                                <option value="Penalty">Penalty</option>
+                                <option value="Yellow Card">Yellow Card</option>
+                                <option value="Red Card">Red Card</option>
+                            </Form.Select>
                             <ErrorMessage name="event" component="span" />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Player:</Form.Label>
                             <Form.Select
-                                id="inputAddMatchStatistic"
+                                id="player"
                                 name="player"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.player}
                                 isInvalid={!!errors.player}
                             >
-                              <option label='Select Player'></option>
-                               {result.players.filter(players=>players["teams.team_name"] == "Man United").map(players=><option key={players.name} value={players.name}>{players.name}</option>)}
-                            <ErrorMessage name="player" component="span" />
+                                <option label='Select Player'></option>
+                                {result.players.filter(players =>
+                                    players["teams.team_name"] == teamSelected)
+                                    .map(players =>
+                                        <option key={players.id} value={players.id}>
+                                            {players.name}
+                                        </option>
+                                    )}
                             </Form.Select>
+                            <ErrorMessage name="player" component="span" />
                         </Form.Group>
-                           
                         <Form.Group>
-                            <div><Form.Label>Venue:</Form.Label></div>
-                            <ErrorMessage name="venue" component="span" />
+                            <Form.Label>Minute:</Form.Label>
                             <Form.Control
                                 autocomplete="off"
-                                id="inputCreateResult"
-                                name="venue"
+                                id="minute"
+                                name="minute"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.venue}
-                                isInvalid={!!errors.venue}
+                                value={values.minute}
+                                isInvalid={!!errors.minute}
                             />
+                            <ErrorMessage name="minute" component="span" />
                         </Form.Group>
-                        <button type="submit"> Create Result</button>
+                        <button type="submit"> Create Statistic</button>
                         <Link to={'/results'} className='edit'>Cancel</Link>
                     </Form>
                 )}

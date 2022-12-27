@@ -26,6 +26,15 @@ exports.getMatchesStatistics = async (req, res) => {
     }
 }
 
+exports.getMatchStatisticsById = async (req, res) => {
+    try {
+        const matchStatistic = await MatchStatistics.findByPk(req.params.id);
+        res.send(matchStatistic).status(200)
+    } catch (error) {
+        return res.send(error).statsu(500);
+    }
+}
+
 exports.getMatchStatisticsByResultId = async (req, res) => {
     try {
         const { id } = req.params;
@@ -44,7 +53,6 @@ exports.getMatchStatisticsByResultId = async (req, res) => {
             }]
         });
 
-
         matches_statistics.forEach(matchStatistic => {
             if (matchStatistic.team_id == matchStatistic["results.host_id"]) {
                 matchStatistic.hostPlayer = matchStatistic["players.name"];
@@ -58,10 +66,10 @@ exports.getMatchStatisticsByResultId = async (req, res) => {
                 matchStatistic.spanHost = 2;
                 if (matchStatistic.event == "Goal") currGoalsGuest++;
             }
-            matchStatistic.currResult = currGoalsHost + "-" + currGoalsGuest
+            matchStatistic.currResult = currGoalsHost + "-" + currGoalsGuest;
         });
 
-        matches_statistics.sort((a,b) => a.minute-b.minute)
+        matches_statistics.sort((a, b) => a.minute - b.minute);
 
         return res.send(matches_statistics);
     } catch (error) {
@@ -112,9 +120,8 @@ const validateData = async (reqBody, res) => {
     const yellowCardsForPlayer = matchesStatistics.filter(match => match.team_id == reqBody.team_id && match.player_id == reqBody.player_id && match.event == "Yellow Card");
     const redCardForPlayer = matchesStatistics.filter(match => match.team_id == reqBody.team_id && match.player_id == reqBody.player_id && match.event == "Red Card");
     const currGoalsForTeam = matchesStatistics.filter(goals => goals.team_id == reqBody.team_id && goals.event == "Goal");
-    // .reduce((a, obj) => a + Object.keys(obj).length / 3, 0);
     const redCardMinute = redCardForPlayer.map(player => player.minute);
-    console.log(currGoalsForTeam)
+    const secondYellowCardMinute = yellowCardsForPlayer.map(statistic => statistic.minute).sort((a, b) => b - a)[0];
 
     const result = await Results.findByPk(reqBody.result_id, {
         attributes: ["host_id", "guest_id", "home_goals", "away_goals"],
@@ -149,6 +156,7 @@ const validateData = async (reqBody, res) => {
 
     if (yellowCardsForPlayer.length == 1) {
         await MatchStatistics.create(reqBody);
+        if (reqBody.minute < secondYellowCardMinute) reqBody.minute = secondYellowCardMinute;
         reqBody.event = "Red Card";
     }
 

@@ -1,10 +1,11 @@
-const express = require('express');
-const MatchStatistics = require('../controllers/matchesStatistics.controller');
+const express = require("express");
+const MatchStatistics = require("../controllers/matchesStatistics.controller");
 const router = express.Router();
 
 router.get("/", MatchStatistics.getMatchesStatistics);
-router.get('/:id', MatchStatistics.getMatchStatisticsByResultId);
+router.get("/:id", MatchStatistics.getMatchStatisticsById);
+router.get("/result/:id", MatchStatistics.getMatchStatisticsByResultId);
 router.post("/", MatchStatistics.createMatchStatistics);
-router.patch('/:id', MatchStatistics.updateMatchStatistics);
+router.patch("/:id", MatchStatistics.updateMatchStatistics);
 router.delete("/:id", MatchStatistics.deleteMatchStatistics);
 module.exports = router;

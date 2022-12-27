@@ -18,7 +18,7 @@ const useFormMatchesStatistics = () => {
   
   const getMatchesStatistics = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/matches-statistics/${id}`);
+        const response = await fetch(`${BASE_URL}/matches-statistics/result/${id}`);
         return response.json().then(data => {
           setMatchesStatistics(data);
           setError(null);

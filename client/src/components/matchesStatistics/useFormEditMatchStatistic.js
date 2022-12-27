@@ -6,6 +6,7 @@ const useFormAddMatchStatistic = () => {
     const BASE_URL = process.env.REACT_APP_URL
 
     const [result, setResult] = useState([]);
+    const [matchStatistic, setMatchStatistic] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const { id } = useParams();
@@ -48,7 +49,7 @@ const useFormAddMatchStatistic = () => {
         if (data.team_name == result.result["host.team_name"]) data.team_id = result.result["host_id"];
         else data.team_id = result.result["guest_id"];
         data.player_id = data.player;
-
+        console.log(data);
         fetch(`${BASE_URL}/matches-statistics`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
