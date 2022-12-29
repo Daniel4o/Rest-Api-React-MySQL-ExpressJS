@@ -15,6 +15,7 @@ import HomePage from './components/homePage/homePage';
 import Layout from './components/homePage/layout/Layout';
 import MatchesStatistics from './components/matchesStatistics/MatchesStatistics';
 import AddMatchStatistic from './components/matchesStatistics/AddMatchStatistic';
+import EditMatchStatistic from './components/matchesStatistics/EditMatchStatistic';
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
 
           <Route path='/Matches-Statistics/:id' element={<MatchesStatistics />} />
           <Route path='/Matches-Statistics/add/:id' element={<AddMatchStatistic />} />
+          <Route path='/Matches-Statistics/edit/:id' element={<EditMatchStatistic />} />
+        
         </Routes>
       </Layout>
     </Router>

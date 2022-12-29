@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as Yup from 'yup';
 
 const useFormAddMatchStatistic = () => {
-    const BASE_URL = process.env.REACT_APP_URL
+    const BASE_URL = process.env.REACT_APP_URL;
 
     const [result, setResult] = useState([]);
     const [isLoading, setIsLoading] = useState(true);

@@ -5,21 +5,14 @@ const Players = models.players;
 
 exports.getMatchesStatistics = async (req, res) => {
     try {
-        const matches_statistics_host = await MatchStatistics.findAll({
+        const matches_statistics = await MatchStatistics.findAll({
             raw: true,
-            include: models.results,
-            as: "host",
-            attributes: []
+            include: [{
+                model: models.results,
+                as: "results",
+            }]
         });
 
-        const matches_statistics_guest = await MatchStatistics.findAll({
-            raw: true,
-            include: models.results,
-            as: "guest",
-            attributes: []
-        });
-
-        const matches_statistics = [...matches_statistics_host, ...matches_statistics_guest];
         return res.send(matches_statistics).status(200);
     } catch (error) {
         return res.send(error).status(500);
@@ -28,7 +21,17 @@ exports.getMatchesStatistics = async (req, res) => {
 
 exports.getMatchStatisticsById = async (req, res) => {
     try {
-        const matchStatistic = await MatchStatistics.findByPk(req.params.id);
+        const matchStatistic = await MatchStatistics.findByPk(req.params.id, {
+            raw: true,
+            include: [{
+                model: models.teams,
+                as: "teams"
+            },
+            {
+                model: models.players,
+                as: "players"
+            }]
+        });
         res.send(matchStatistic).status(200)
     } catch (error) {
         return res.send(error).statsu(500);
@@ -115,7 +118,7 @@ const validateData = async (reqBody, res) => {
         where: { result_id: reqBody.result_id },
         raw: true,
         attributes: ["team_id", "player_id", "event", "minute"]
-    })
+    });
 
     const yellowCardsForPlayer = matchesStatistics.filter(match => match.team_id == reqBody.team_id && match.player_id == reqBody.player_id && match.event == "Yellow Card");
     const redCardForPlayer = matchesStatistics.filter(match => match.team_id == reqBody.team_id && match.player_id == reqBody.player_id && match.event == "Red Card");
@@ -130,12 +133,12 @@ const validateData = async (reqBody, res) => {
 
     const player = await Players.findByPk(reqBody.player_id, {
         raw: true,
-        attributes: ["teamId"]
     });
 
     if (result.host_id != reqBody.team_id && result.guest_id != reqBody.team_id) {
         return res.status(400).send({ message: "This team does not play on this match!" });
     }
+
     if (player.teamId != reqBody.team_id) {
         return res.status(400).send({ message: "The player is not on this team!" })
     }
