@@ -1,4 +1,4 @@
-import { Form, Spinner } from 'react-bootstrap'
+import { Form, Spinner, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { Formik, ErrorMessage } from 'formik';
 import useFormAddMatchStatistic from './useFormAddMatchStatistic';
@@ -24,7 +24,7 @@ const AddMatchStatistic = (submitForm) => {
                 validationSchema={validationSchema}
             >
                 {({ values, errors, handleBlur, handleChange, handleSubmit }) => (
-                    <Form className="formContainer" onSubmit={handleSubmit}>
+                    <Form className="formContainer2" onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Label>Team:</Form.Label>
                             <Form.Select
@@ -93,8 +93,8 @@ const AddMatchStatistic = (submitForm) => {
                             />
                             <ErrorMessage name="minute" component="span" />
                         </Form.Group>
-                        <button type="submit"> Create Statistic</button>
-                        <Link to={'/results'} className='edit'>Cancel</Link>
+                        <Button variant="success" type="submit"> Create Statistic</Button>
+                        <Button href="/results" variant="secondary">Cancel</Button>
                     </Form>
                 )}
             </Formik>

@@ -1,36 +1,20 @@
 import { Link, } from "react-router-dom";
-import IMAGES from '../homePage/images/images'
-import { Spinner, Button, ButtonGroup, Container, Row, Col } from "react-bootstrap";
+import { Spinner, Button, ButtonGroup, Container, Row, Col, Pagination } from "react-bootstrap";
 import useFormMatchesStatistics from "./useFormMatchesStatistics";
 import "./MatchesStatistics.css"
 
 const MatchesStatistics = () => {
-  const { matchesStatistics, finalResult, id, teamNames, isLoading, error, deleteMatchStatistic } = useFormMatchesStatistics();
+  const { matchesStatistics, finalResult, id, teamNames, isLoading, error, checkEvent, showResult, deleteMatchStatistic } = useFormMatchesStatistics();
+
   if (isLoading) {
-    return (<Spinner animation="border" variant="primary" />)
+    return (
+      <Container className="content">
+        <Spinner className="position-absolute top-50 start-50 translate-middle" animation="border" variant="primary" />
+      </Container>
+    )
   }
   if (error) {
     return <div>There was an error: {error}</div>
-  }
-
-  const checkEvent = (event) => {
-    if (event == "Goal") {
-      return <img src={IMAGES.ball} />;
-    }
-    if (event == "Penalty") {
-      return <img src={IMAGES.penalty} />;
-    }
-    if (event == "Yellow Card") {
-      return <img src={IMAGES.yellowCard} />;
-    }
-    if (event == "Red Card") {
-      return <img src={IMAGES.redCard} height="24px" width="24px" />;
-    }
-  }
-
-  const showResult = (hostEvent, guestEvent, result) => {
-    if (hostEvent == "Goal" || guestEvent == "Goal") return result;
-    return null;
   }
 
   return (
@@ -39,7 +23,10 @@ const MatchesStatistics = () => {
         <Col className="finalResult">
           <h3>{teamNames[0]}&ensp;{finalResult}&ensp;{teamNames[1]}</h3>
         </Col>
-      </Row>
+    <Row>  
+      <Button id="lineupsButton" type="primary">View Lineups</Button>
+      </Row>  
+    </Row>
       {matchesStatistics.map(statistic => (
         <Row className='text-white bg-dark' >
           <Col md={{ span: 2 }}>{statistic.minute}'</Col>
@@ -49,14 +36,17 @@ const MatchesStatistics = () => {
           <Col>{checkEvent(statistic.guestEvent)}</Col>
           <Col>{statistic.guestPlayer}</Col>
           <Col>
-            <Link to={`/matches-statistics/edit/${statistic.id}`} className='edit'>Edit</Link>
+            <Link to={"/matches-statistics/edit/" + statistic.id} state={statistic.result_id}><Button variant="warning">Edit</Button></Link>
           </Col>
           <Col>
             <Button variant='danger' onClick={() => deleteMatchStatistic(statistic.id)}>Delete</Button>
           </Col>
         </Row>
       ))}
-      <Link className="addButton" to={`/matches-statistics/add/${id}`}>Add New</Link>
+      <ButtonGroup id="buttonGroup">
+        <Button href={"/matches-statistics/add/" + id} className="btn btn-outline-light">Add New</Button>
+        <Button variant="secondary" href="/results" id="backButton" className="btn btn-outline-light">Back to Results</Button>
+      </ButtonGroup>
     </Container>
   )
 }

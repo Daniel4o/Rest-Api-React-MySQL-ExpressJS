@@ -94,7 +94,6 @@ exports.createMatchStatistics = async (req, res) => {
 exports.updateMatchStatistics = async (req, res) => {
     try {
         const match_statistics = await MatchStatistics.findByPk(req.params.id);
-        validateData(req.body, res);
         if (res.headersSent) return;
         await match_statistics.update(req.body);
         return res.send(req.body).status(200);
@@ -115,7 +114,7 @@ exports.deleteMatchStatistics = async (req, res) => {
 
 const validateData = async (reqBody, res) => {
     const matchesStatistics = await MatchStatistics.findAll({
-        where: { result_id: reqBody.result_id },
+        where: { result_id: reqBody["result_id"] },
         raw: true,
         attributes: ["team_id", "player_id", "event", "minute"]
     });

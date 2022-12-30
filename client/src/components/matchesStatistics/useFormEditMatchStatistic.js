@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import * as Yup from 'yup';
 
 const useFormAddMatchStatistic = () => {
@@ -17,9 +17,11 @@ const useFormAddMatchStatistic = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [resultId, setResultId] = useState(0);
     const { id } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    const result_id = location.state;
+    console.log(typeof(result_id))
 
     useEffect(async () => {
         getMatchStatistic();
@@ -32,7 +34,6 @@ const useFormAddMatchStatistic = () => {
             const response = await fetch(`${BASE_URL}/matches-statistics/${id}`);
             return response.json()
                 .then(data => {
-                    setResultId(data.result_id);
                     setMatchStatistic(data);
                     setError(false);
                     setIsLoading(false);
@@ -45,7 +46,7 @@ const useFormAddMatchStatistic = () => {
 
     const getResultValues = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/results/${resultId}`);
+            const response = await fetch(`${BASE_URL}/results/${result_id}`);
             return response.json()
                 .then(data => {
                     setPlayers(data.players);
@@ -66,10 +67,6 @@ const useFormAddMatchStatistic = () => {
         }
     }
 
-
-
-
-    console.log(players)
     const initialValues = {
         team_name: matchStatistic["teams.team_name"],
         event: matchStatistic.event,
@@ -85,11 +82,11 @@ const useFormAddMatchStatistic = () => {
     });
 
     const onSubmit = (data) => {
-        data.result_id = id;
+        data.result_id = result_id
         if (data.team_name == result.result["host.team_name"]) data.team_id = result.result["host_id"];
         else data.team_id = result.result["guest_id"];
         data.player_id = players.find(player=>player.name == data.player_name).id;
-
+        console.log(data);
         fetch(`${BASE_URL}/matches-statistics/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
@@ -98,7 +95,7 @@ const useFormAddMatchStatistic = () => {
             navigate('/results');
         })
     }
-    return { initialValues, players, teams, result, error, isLoading, validationSchema, onSubmit }
+    return { initialValues, players, teams, result_id, error, isLoading, validationSchema, onSubmit }
 }
 
 export default useFormAddMatchStatistic;
