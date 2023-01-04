@@ -1,19 +1,18 @@
 import { Form, Spinner, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
 import { Formik, ErrorMessage } from 'formik';
 import useFormEditMatchStatistic from './useFormEditMatchStatistic';
 import './MatchesStatistics.css';
 import { useState, useEffect } from 'react';
 
 const EditMatchStatistic = (submitForm) => {
-    const { initialValues, teams, players, error, isLoading, validationSchema, onSubmit } = useFormEditMatchStatistic(submitForm);
+    const { initialValues, result_id, teams, players, error, isLoading, validationSchema, onSubmit } = useFormEditMatchStatistic(submitForm);
     const [teamSelected, setTeamSelected] = useState(initialValues.team_name);
     const [playerSelected, setPlayerSelected] = useState(initialValues.player_name);
-   
+
     useEffect(() => {
         setTeamSelected(initialValues.team_name);
         setPlayerSelected(initialValues.player_name);
-    }, [initialValues.team_name,initialValues.player_name]);
+    }, [initialValues.team_name, initialValues.player_name]);
 
     if (isLoading) {
         return (<Spinner animation="border" variant="primary" />)
@@ -106,7 +105,7 @@ const EditMatchStatistic = (submitForm) => {
                             <ErrorMessage name="minute" component="span" />
                         </Form.Group>
                         <Button type="submit" variant="success"> Edit Statistic</Button>
-                        <Button href="/results" variant="secondary" >Cancel</Button>
+                        <Button href={"/matches-statistics/" + result_id} variant="danger" >Cancel</Button>
                     </Form>
                 )}
             </Formik>

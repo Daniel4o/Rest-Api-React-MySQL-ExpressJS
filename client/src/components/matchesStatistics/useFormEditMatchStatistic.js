@@ -3,7 +3,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import * as Yup from 'yup';
 
 const useFormAddMatchStatistic = () => {
-    const BASE_URL = process.env.REACT_APP_URL
+    const BASE_URL = process.env.REACT_APP_URL;
 
     const [result, setResult] = useState([]);
     const [matchStatistic, setMatchStatistic] = useState({
@@ -21,13 +21,12 @@ const useFormAddMatchStatistic = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const result_id = location.state;
-    console.log(typeof(result_id))
 
     useEffect(async () => {
         getMatchStatistic();
         getResultValues();
     }, [BASE_URL]);
-    
+
 
     const getMatchStatistic = async () => {
         try {
@@ -49,10 +48,11 @@ const useFormAddMatchStatistic = () => {
             const response = await fetch(`${BASE_URL}/results/${result_id}`);
             return response.json()
                 .then(data => {
+                    console.log(result_id)
                     setPlayers(data.players);
                     setTeams({
                         ...teams,
-                        host: data.result["host.team_name"], 
+                        host: data.result["host.team_name"],
                         host_id: data.result["host.id"],
                         guest: data.result["guest.team_name"],
                         guest_id: data.result.guest_id
@@ -85,7 +85,7 @@ const useFormAddMatchStatistic = () => {
         data.result_id = result_id
         if (data.team_name == result.result["host.team_name"]) data.team_id = result.result["host_id"];
         else data.team_id = result.result["guest_id"];
-        data.player_id = players.find(player=>player.name == data.player_name).id;
+        data.player_id = players.find(player => player.name == data.player_name).id;
         console.log(data);
         fetch(`${BASE_URL}/matches-statistics/${id}`, {
             method: "PATCH",
@@ -95,6 +95,7 @@ const useFormAddMatchStatistic = () => {
             navigate('/results');
         })
     }
+
     return { initialValues, players, teams, result_id, error, isLoading, validationSchema, onSubmit }
 }
 

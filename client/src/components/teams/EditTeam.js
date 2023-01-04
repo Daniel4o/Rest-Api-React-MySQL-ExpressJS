@@ -1,11 +1,10 @@
-import { Link, } from "react-router-dom";
 import { Formik, ErrorMessage } from "formik";
-import { Form, Spinner } from 'react-bootstrap'
+import { Form, Spinner, Button, ButtonGroup } from 'react-bootstrap'
 import useFormEditTeam from './useFormEditTeam';
 import './Teams.css';
 
 const EditTeam = (submitForm) => {
-    const { initialValues, validationSchema, error, isLoading, onSubmit } = useFormEditTeam(submitForm)
+    const { initialValues, validationSchema, error, isLoading, onSubmit } = useFormEditTeam(submitForm);
 
     if (isLoading) {
         return (<Spinner animation="border" variant="primary" />)
@@ -36,8 +35,10 @@ const EditTeam = (submitForm) => {
                                 value={values.team_name}
                                 isInvalid={!!errors.team_name}
                             />
-                            <button type="submit">Edit</button>
-                            <Link to={'/teams'} className='edit'>Cancel</Link>
+                            <ButtonGroup>
+                                <Button className="block-example border border-dark" variant="success" type="submit">Edit</Button>
+                                <Button className="block-example border border-dark" variant="danger" href='/teams'>Cancel</Button>
+                            </ButtonGroup>
                         </Form.Group>
                     </Form>
                 )}
@@ -46,4 +47,4 @@ const EditTeam = (submitForm) => {
     )
 }
 
-export default EditTeam
+export default EditTeam;

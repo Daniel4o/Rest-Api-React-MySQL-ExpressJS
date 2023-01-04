@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Container, Table, Button } from 'react-bootstrap';
 import useFormMainTeamPlayers from './useFormMainTeamPlayers';
 
 const TeamPlayers = () => {
-    const { teams, teamPlayers, error, isLoading } = useFormMainTeamPlayers()
+    const { teams, teamPlayers, error, isLoading } = useFormMainTeamPlayers();
 
     if (isLoading) {
         return (<Spinner animation="border" variant="primary" />)
@@ -13,9 +12,9 @@ const TeamPlayers = () => {
     }
 
     return (
-        <div>
-            <h2 className='centeredSecond'>All Team Players</h2>
-            <table>
+        <Container className='containerTeams'>
+            <h2 className='h2'>All Team Players</h2>
+            <Table Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
                         <th>№</th>
@@ -36,14 +35,15 @@ const TeamPlayers = () => {
                         </tr>
                     ))}
                 </tbody>
-            </table>
-            <div>
-                <h2 className='centeredSecond'>View Team Players</h2>
-                <table>
+            </Table>
+                <h2 className='h2'>View Team Players</h2>
+                <Table Table striped bordered hover variant="dark">
                     <thead>
-                        <th>№</th>
-                        <th>Team</th>
-                        <th>Actions</th>
+                        <tr>
+                            <th>№</th>
+                            <th>Team</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {teams.map((value, index) => (
@@ -51,16 +51,15 @@ const TeamPlayers = () => {
                                 <td>{index + 1}.</td>
                                 <td>{value['team_name']}</td>
                                 <td>
-                                    <Link to={`/Team-Players/${value.id}`} className='link'>View</Link>
+                                    <Button href={`/Team-Players/${value.id}`}>View</Button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
-                </table>
-            </div>
-            <div><Link to={'/'} className='link'>Back to Home Page</Link></div>
-        </div>
+                </Table>
+            <Button href='/'>Back to Home Page</Button>
+        </Container>
     )
 }
 
-export default TeamPlayers
+export default TeamPlayers;

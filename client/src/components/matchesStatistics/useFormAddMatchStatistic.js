@@ -54,10 +54,10 @@ const useFormAddMatchStatistic = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         }).then(() => {
-            navigate('/results');
+            navigate(`/matches-statistics/${id}`);
         })
     }
-    return { initialValues, result, error, isLoading, validationSchema, onSubmit }
+    return { initialValues, result, id, error, isLoading, validationSchema, onSubmit }
 }
 
 export default useFormAddMatchStatistic;

@@ -2,6 +2,7 @@
     align-items: center;
     justify-content: space-between;
     outline: 8px solid black;
+    width: 100%;
   }
 
   .logo {
@@ -33,12 +34,4 @@
   .header a:active,
   .header a.active {
     color: #cc2062;
-  }
-  
-  .badge {
-    background-color: #cc2062;
-    color: white;
-    border-radius: 12px;
-    padding: 0 1rem;
-    margin-left: 0.5rem;
   }

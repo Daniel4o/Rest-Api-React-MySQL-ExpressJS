@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
 import { Formik, ErrorMessage } from "formik";
 import './Teams.css';
-import { Form, Spinner } from 'react-bootstrap'
+import { Form, Spinner, Button, ButtonGroup } from 'react-bootstrap'
 import useFormAddTeam from './useFormAddTeam';
 
 const AddTeam = (submitForm) => {
-    const { initialValues, validationSchema, error, isLoading, onSubmit } = useFormAddTeam(submitForm)
+    const { initialValues, validationSchema, error, isLoading, onSubmit } = useFormAddTeam(submitForm);
 
     if (isLoading) {
         return (<Spinner animation="border" variant="primary" />)
@@ -23,7 +22,7 @@ const AddTeam = (submitForm) => {
             >
                 {({ values, errors, handleBlur, handleChange, handleSubmit }) => (
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group className="formContainer" md="4">
+                        <Form.Group className='formContainer' md="4">
                             <Form.Label>Team Name:</Form.Label>
                             <ErrorMessage name="team_name" component="span" />
                             <Form.Control
@@ -36,8 +35,10 @@ const AddTeam = (submitForm) => {
                                 value={values.team_name}
                                 isInvalid={!!errors.team_name}
                             />
-                            <button type="submit">Create Team</button>
-                            <Link to={'/teams'} className='edit'>Cancel</Link>
+                            <ButtonGroup className='buttonGroupTeams'>
+                                <Button className="block-example border border-dark" variant="success" type="submit">Create Team</Button>
+                                <Button className="block-example border border-dark" variant="danger" href='/teams'>Cancel</Button>
+                            </ButtonGroup>
                         </Form.Group>
                     </Form>
                 )}
@@ -46,4 +47,4 @@ const AddTeam = (submitForm) => {
     );
 }
 
-export default AddTeam
+export default AddTeam;

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import useFormTeamPlayersById from './useFormTeamPlayersById';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Container, Table, Button, ButtonGroup } from 'react-bootstrap';
 
 const TeamPlayersById = () => {
-    const { teamPlayersById, error, isLoading } = useFormTeamPlayersById()
+    const { teamPlayersById, error, isLoading } = useFormTeamPlayersById();
 
     if (isLoading) {
         return (<Spinner animation="border" variant="primary" />)
@@ -13,13 +13,13 @@ const TeamPlayersById = () => {
     }
 
     return (
-        <div>
-            <h2 className='centeredSecond'>Players</h2>
-            <table className='getPlayers'>
+        <Container className='containerTeams'>
+            <h2 className='h2'>Players</h2>
+            <Table stripped bordered hover variant='dark'>
                 <thead>
                     <tr>
-                        <th>№</th>
-                        <th>Name</th>
+                        <th width="150">№</th>
+                        <th width="400">Name</th>
                         <th>Position</th>
                         <th>Age</th>
                     </tr>
@@ -33,12 +33,14 @@ const TeamPlayersById = () => {
                             <td>{value['players.age']}</td>
                         </tr>
                     ))}
-                    <Link to={'/Team-Players'} className='link'>Back To Team Players</Link>
-                    <Link to={'/'} className='link'>Home Page</Link>
                 </tbody>
-            </table>
-        </div>
+            </Table>
+            <ButtonGroup className="buttonGroupTeamPlayers">
+                <Button href='/Team-Players'>Back To Team Players</Button>
+                <Button variant="secondary" id="home" href='/'>Home Page</Button>
+            </ButtonGroup>
+        </Container>
     )
 }
 
-export default TeamPlayersById
+export default TeamPlayersById;

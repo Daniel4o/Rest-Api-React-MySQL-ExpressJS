@@ -12,19 +12,23 @@
 }
 
 #buttonGroup {
-  display:flex;
-}
-#backButton{
-  float:right
+  align-items: center;
+  justify-content: center;
+  display:grid;
+  margin-right:150px;
 }
 
+#backButton{
+  right:0;
+}
 
 .finalResult {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
+
 }
 
 .addMatchStatistic {
@@ -61,7 +65,4 @@ span {
   color: red;
 }
 
-#lineupsButton {
 
-width:200px
-}

@@ -1,10 +1,9 @@
-import { Link, } from "react-router-dom";
-import { Button, ButtonGroup, Spinner } from "react-bootstrap";
+import { Button, ButtonGroup, Spinner, Container, Table } from "react-bootstrap";
 import useFormTeams from './useFormTeams'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Teams = () => {
-    const { teams, error, deleteTeam, isLoading } = useFormTeams()
+    const { teams, error, deleteTeam, isLoading } = useFormTeams();
 
     if (isLoading) {
         return (<Spinner animation="border" variant="primary" />)
@@ -14,12 +13,12 @@ const Teams = () => {
     }
 
     return (
-        <div>
-            <h2 className='centered'>Clubs</h2>
-            <Link to="/Teams/add" className="link">Add New</Link>
-            <table className='teams'>
+        <Container className="containerTeams">
+            <h2 className='h2'>Clubs</h2>
+            <Button href="/Teams/add">Add New</Button>
+            <Table striped bordered hover variant="dark" className='teams'>
                 <thead>
-                    <tr >
+                    <tr>
                         <th>№</th>
                         <th>Team</th>
                         <th>Actions</th>
@@ -32,18 +31,18 @@ const Teams = () => {
                             <td>{team.team_name}</td>
                             <td>
                                 <ButtonGroup>
-                                    <Link to={`/Teams/${team.id}`} className='link'>View</Link>
-                                    <Link to={`/Teams/edit/${team.id}`} className='edit'>Edit</Link>
+                                    <Button href={`/Teams/${team.id}`}>View</Button>
+                                    <Button href={`/Teams/edit/${team.id}`} variant="secondary">Edit</Button>
                                     <Button variant="danger" onClick={() => deleteTeam(team.id)}>Delete</Button>
                                 </ButtonGroup>
                             </td>
                         </tr>
                     ))}
-                </tbody>
-            </table>
-            <Link to={'/'} className='link'>Back To Home Page</Link>
-        </div>
+                </tbody>     
+            </Table>
+            <Button href='/'>Back To Home Page</Button>
+        </Container>
     )
 }
 
-export default Teams
+export default Teams;

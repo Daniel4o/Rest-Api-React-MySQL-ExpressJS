@@ -1,176 +1,69 @@
-
 .createTeamPage {
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .formContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 300px;
-    height: auto;
-    padding: 20px;
-    border: 5px solid black;
-    border-radius: 5px;
-  }
-  
-  .formContainer #inputCreateTeam {
-    height: 40px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 2px solid grey;
-    border-radius: 5px;
-    padding-left: 10px;
-    font-size: 20px;
-  }
-  
-  .formContainer button {
-    margin-top: 15px;
-    height: 40px;
-    border: 2px solid black;
-    background-color: #bb5179;
-    border-radius: 5px;
-    color: white;
-  }
-  
-  .formContainer button:hover {
-    cursor: pointer;
-    background-color: #141314;
-  }
-  
-  span {
-    color: red;
-  }
-  table {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  table td, table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  table th:nth-child(even){background-color: #cc2062;}
-  table th:nth-child(odd){background-color: #cc2062;}
-  table tr:nth-child(even){background-color: #f2f2f2;}
-  table tr:nth-child(odd){background-color: #f7dede;}
-  
-  table tr:hover {background-color: #ddd;}
-  
-  table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: #cc2062;
-    color: white;
-  }
-tr {
-text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100vw;
+  height: 88vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-table.teams th:nth-child(1) {
-  width: 10% 
- }
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  height: auto;
+  padding: 20px;
+  border: 5px solid black;
+  border-radius: 5px;
+}
 
-table.teams th:nth-child(2) {
-   width: 50% 
-  }
+.formContainer #inputCreateTeam {
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding-left: 10px;
+  text-align: center;
+  font-size: 20px;
+}
 
-  a.link:link,  a.link:visited {
-    background-color: #cc2062;
-    color: white;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-  }
-  
-  a.link:hover, a.link:active {
-    background-color: #bb5179;
-  }
+span {
+  color: red;
+}
 
-  a.add:link,  a.add:visited {
-    background-color: #cc2062;
-    color: white;
-    text-align: left;
-    padding: 14px 25px;
-    text-decoration: none;
-    display: inline-block;
-  }
-  
-  a.add:hover, a.add:active {
-    background-color: #bb5179;
-  }
-  
-  .centered {
-    width: 100vw;
-    height: auto;
-    display: flex;
-    align-items: center;
-    padding-top: 40px;
-    flex-direction: column;
-  }
-  .centeredSecond {
-    width: 100vw;
-    height: auto;
-    display: flex;
-    align-items: center;
-    padding-top: 40px;
-    flex-direction: column;
-    margin-bottom: 50px;
-  }
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
- a.edit:link, a.edit:visited {
-    background-color: #c54073;
-    color: white;
-    border: 2px solid black;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-  }
-  
-  a.edit:hover, a.edit:active {
-    background-color: #cc2062;
-    color: white;
-  }
+.containerTeams {
+  min-height: 88vh;
+}
 
-  .error {
-    border: 2px solid #FF6565;
-  }
+tr {
+  text-align: center;
+}
 
-  table.getTeams th:nth-child(1) {
-    width: 6%
-   }
-   table.getTeams th:nth-child(2) {
-    width: 12%
-   }
-  table.getTeams th:nth-child(3) {
-   width: 25%
-  }
-  table.getTeams th:nth-child(4) {
-    width: 8%
-  }
-  table.getTeams th:nth-child(5) {
-    width: 8%
-  }
-  table.getTeams th:nth-child(6) {
-    width: 25%
-  }
-  table.getTeams th:nth-child(7) {
-    width: 20%
-  }
+.error {
+  border: 2px solid #FF6565;
+}
 
-  table.getPlayers th:nth-child(1) {
-    width: 15%
-  }
-  table.getPlayers th:nth-child(2) {
-    width: 35%
-  }
+.buttonGroupTeams {
+  width: 450px;
+  justify-content: center;
+  display: flex;
+}
 
- 
+#home {
+  left: 700px;
+}
+
+.buttonGroupTeamPlayers {
+  width: 300px;
+  justify-content: center;
+  display: flex;
+}
+

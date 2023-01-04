@@ -11,6 +11,15 @@
 
 .background {
     background-image: url("../images/background.png");
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* Take full size */
+    height: 100%;
+    width: 100%;
+
 }
 
 .margin {

@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-import { Form, Spinner } from 'react-bootstrap';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { Form, Spinner, Button } from 'react-bootstrap';
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import useFormEditPlayer from './useFormEditPlayer';
@@ -27,7 +25,7 @@ const EditPlayer = (submitForm) => {
                 {({ values, errors, handleBlur, handleChange, handleSubmit }) => (
                     <Form className="formContainer" onSubmit={handleSubmit}>
                         <Form.Group>
-                            <div><Form.Label>Team Name:</Form.Label></div>
+                            <Form.Label>Team Name:</Form.Label>
                             <ErrorMessage name="team_name" component="span" />
                             <Form.Select
                                 id="inputCreatePlayer"
@@ -42,7 +40,7 @@ const EditPlayer = (submitForm) => {
                             </Form.Select>
                         </Form.Group>
                         <Form.Group>
-                            <div><Form.Label>Name:</Form.Label></div>
+                            <Form.Label>Name:</Form.Label>
                             <ErrorMessage name="name" component="span" />
                             <Form.Control
                                 type="text"
@@ -56,7 +54,7 @@ const EditPlayer = (submitForm) => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <div><Form.Label>Position:</Form.Label></div>
+                            <Form.Label>Position:</Form.Label>
                             <ErrorMessage name="position" component="span" />
                             <Form.Control
                                 autocomplete="off"
@@ -69,8 +67,7 @@ const EditPlayer = (submitForm) => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <div><Form.Label>Age:</Form.Label></div>
-                            <ErrorMessage name="age" component="span" />
+                            <Form.Label>Age:</Form.Label>
                             <Form.Control
                                 autocomplete="off"
                                 id="inputCreatePlayer"
@@ -80,9 +77,10 @@ const EditPlayer = (submitForm) => {
                                 value={values.age}
                                 isInvalid={!!errors.age}
                             />
+                            <ErrorMessage name="age" component="span" />
                         </Form.Group>
-                        <button type="submit"> Edit Player</button>
-                        <Link to={'/players'} className='edit'> Cancel </Link>
+                        <Button variant="success" type="submit"> Edit Player</Button>
+                        <Button variant="danger" href='/players'> Cancel </Button>
                     </Form>
                 )}
             </Formik>

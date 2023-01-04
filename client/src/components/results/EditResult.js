@@ -1,11 +1,10 @@
-import { Form, Spinner } from 'react-bootstrap';
+import { Form, Spinner, Button } from 'react-bootstrap';
 import { Formik, ErrorMessage } from "formik";
 import useFormEditResult from './useFormEditResult';
-import { Link } from 'react-router-dom';
 import './Results.css';
 
 const EditResult = (submitForm) => {
-    const { validationSchema, initialValues, error, isLoading, hostName, guestName, onSubmit } = useFormEditResult(submitForm)
+    const { validationSchema, initialValues, error, isLoading, hostName, guestName, onSubmit } = useFormEditResult(submitForm);
 
     if (isLoading) {
         return (<Spinner animation="border" variant="primary" />)
@@ -25,8 +24,7 @@ const EditResult = (submitForm) => {
                 {({ values, errors, handleBlur, handleChange, handleSubmit }) => (
                     <Form className="formContainer" onSubmit={handleSubmit}>
                         <Form.Group md="4">
-                            <div><Form.Label>Host Name: </Form.Label></div>
-                            <ErrorMessage name="host_name" component="span" />
+                            <Form.Label>Host Name: </Form.Label>
                             <Form.Select
                                 id="inputCreateResult"
                                 name="host_name"
@@ -38,10 +36,10 @@ const EditResult = (submitForm) => {
                                 <option label='Select a Host'></option>
                                 {hostName.map((id) => <option key={id} value={id}>{id}</option>)}
                             </Form.Select>
+                            <ErrorMessage name="host_name" component="span" />
                         </Form.Group>
                         <Form.Group>
-                            <div><Form.Label>Guest Name:</Form.Label></div>
-                            <ErrorMessage name="guest_name" component="span" />
+                            <Form.Label>Guest Name:</Form.Label>
                             <Form.Select
                                 id="inputCreateResult"
                                 name="guest_name"
@@ -53,10 +51,10 @@ const EditResult = (submitForm) => {
                                 <option label='Select a Guest'></option>
                                 {guestName.map((id) => <option key={id} value={id}>{id}</option>)}
                             </Form.Select>
+                            <ErrorMessage name="guest_name" component="span" />
                         </Form.Group>
                         <Form.Group>
-                            <div><Form.Label>Home Goals:</Form.Label></div>
-                            <ErrorMessage name="home_goals" component="span" />
+                            <Form.Label>Home Goals:</Form.Label>
                             <Form.Control
                                 autocomplete="off"
                                 id="inputCreateResult"
@@ -66,10 +64,10 @@ const EditResult = (submitForm) => {
                                 value={values.home_goals}
                                 isInvalid={!!errors.home_goals}
                             />
+                            <ErrorMessage name="home_goals" component="span" />
                         </Form.Group>
                         <Form.Group>
-                            <div><Form.Label>Away Goals: </Form.Label></div>
-                            <ErrorMessage name="away_goals" component="span" />
+                         <Form.Label>Away Goals: </Form.Label>
                             <Form.Control
                                 autocomplete="off"
                                 id="inputCreateResult"
@@ -79,9 +77,10 @@ const EditResult = (submitForm) => {
                                 value={values.away_goals}
                                 isInvalid={!!errors.away_goals}
                             />
+                            <ErrorMessage name="away_goals" component="span" />
                         </Form.Group>
                         <Form.Group >
-                            <div><Form.Label>Date:</Form.Label></div>
+                            <Form.Label>Date:</Form.Label>
                             <Form.Control
                                 type="date"
                                 autocomplete="off"
@@ -92,10 +91,10 @@ const EditResult = (submitForm) => {
                                 value={values.date}
                                 isInvalid={!!errors.date}
                             />
+                            <ErrorMessage name="date" component="span" />
                         </Form.Group>
                         <Form.Group>
-                            <div><Form.Label>Venue: </Form.Label></div>
-                            <ErrorMessage name="venue" component="span" />
+                            <Form.Label>Venue: </Form.Label>
                             <Form.Control
                                 autocomplete="off"
                                 id="inputCreateResult"
@@ -105,9 +104,10 @@ const EditResult = (submitForm) => {
                                 value={values.venue}
                                 isInvalid={!!errors.venue}
                             />
+                            <ErrorMessage name="venue" component="span" />
                         </Form.Group>
-                        <button type="submit"> Edit Result</button>
-                        <Link to={'/results'} className='edit'>Cancel</Link>
+                        <Button variant="success" type="submit"> Edit Result</Button>
+                        <Button variant="danger" href={'/results'}>Cancel</Button>
                     </Form>
                 )}
             </Formik>
@@ -115,4 +115,4 @@ const EditResult = (submitForm) => {
     );
 }
 
-export default EditResult
+export default EditResult;

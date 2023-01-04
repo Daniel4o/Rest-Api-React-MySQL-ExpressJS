@@ -44,7 +44,6 @@ const useFormMatchesStatistics = () => {
       }
     }
     
-
     const deleteMatchStatistic = async (id) => {
       try {
         await fetch(`${BASE_URL}/matches-statistics/${id}`, {

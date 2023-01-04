@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link, } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import './Players.css';
-import { Spinner, Button, ButtonGroup } from 'react-bootstrap';
+import { Spinner, Button, ButtonGroup, Container, Table } from 'react-bootstrap';
 import useFormPlayers from './useFormPlayers';
 
 const Players = () => {
   const { players, paranoidTeams, error, isLoading, deletePlayer } = useFormPlayers()
 
+  console.log(paranoidTeams.length == 0)
   if (isLoading) {
     return (<Spinner animation="border" variant="primary" />)
   }
@@ -15,10 +16,10 @@ const Players = () => {
   }
 
   return (
-    <div>
-      <h2 className='centered'>Players</h2>
-      <Link to="/Players/add" className="link">Add New</Link>
-      <table>
+    <Container>
+      <h2 className='h2'>Players</h2>
+      <Button href="/Players/add">Add New</Button>
+      <Table striped bordered hover variant="dark">
         <thead>
           <tr>
             <th>№</th>
@@ -39,44 +40,48 @@ const Players = () => {
               <td>{player.age}</td>
               <td>
                 <ButtonGroup>
-                  <Link to={`/Players/edit/${player.id}`} className='edit'>Edit</Link>
+                  <Button href={`/Players/edit/${player.id}`}>Edit</Button>
                   <Button variant='danger' onClick={() => deletePlayer(player.id)}>Delete</Button>
                 </ButtonGroup>
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
-      <h2 className='centeredSecond'>Free Transfers</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>№</th>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Age</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paranoidTeams.map((player, index) => (
-            <tr key={player.id}>
-              <td>{index + 1}.</td>
-              <td>{player.name}</td>
-              <td>{player.position}</td>
-              <td>{player.age}</td>
-              <td>
-                <ButtonGroup>
-                  <Link to={`/Players/edit/${player.id}`} className='edit'>Edit</Link>
-                  <Button variant='danger' onClick={() => deletePlayer(player.id)}>Delete</Button>
-                </ButtonGroup>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <Link to={'/'} className="link">Back To Home Page</Link>
-    </div>
+      </Table>
+      {paranoidTeams.length != 0 ? (
+        <div>
+          <h2 className='h2'>Free Transfers</h2>
+          <Table striped bordered hover variant="dark">
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Age</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paranoidTeams.map((player, index) => (
+                <tr key={player.id}>
+                  <td>{index + 1}.</td>
+                  <td>{player.name}</td>
+                  <td>{player.position}</td>
+                  <td>{player.age}</td>
+                  <td>
+                    <ButtonGroup>
+                      <Button href={`/Players/edit/${player.id}`}>Edit</Button>
+                      <Button variant='danger' onClick={() => deletePlayer(player.id)}>Delete</Button>
+                    </ButtonGroup>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      ) : null}
+      <Button href='/'>Back To Home Page</Button>
+    </Container>
   )
 }
 

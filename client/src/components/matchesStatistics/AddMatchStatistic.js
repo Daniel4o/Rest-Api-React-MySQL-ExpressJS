@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const AddMatchStatistic = (submitForm) => {
     const [teamSelected, setTeamSelected] = useState("");
-    const { initialValues, result, error, isLoading, validationSchema, onSubmit } = useFormAddMatchStatistic(submitForm);
+    const { initialValues, result, id, error, isLoading, validationSchema, onSubmit } = useFormAddMatchStatistic(submitForm);
 
     if (isLoading) {
         return (<Spinner animation="border" variant="primary" />)
@@ -94,7 +94,7 @@ const AddMatchStatistic = (submitForm) => {
                             <ErrorMessage name="minute" component="span" />
                         </Form.Group>
                         <Button variant="success" type="submit"> Create Statistic</Button>
-                        <Button href="/results" variant="secondary">Cancel</Button>
+                        <Button href={"/matches-statistics/" + id} variant="danger">Cancel</Button>
                     </Form>
                 )}
             </Formik>

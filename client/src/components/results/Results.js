@@ -1,9 +1,8 @@
-import { Link, } from "react-router-dom";
-import { Spinner, Button, ButtonGroup } from "react-bootstrap";
+import { Spinner, Button, ButtonGroup, Container, Table } from "react-bootstrap";
 import useFormResults from './useFormResults';
 
 const Results = () => {
-  const { results, isLoading, error, deleteResult } = useFormResults()
+  const { results, isLoading, error, deleteResult } = useFormResults();
 
   if (isLoading) {
     return (<Spinner animation="border" variant="primary" />)
@@ -13,10 +12,10 @@ const Results = () => {
   }
 
   return (
-    <div>
-      <h2 className='centered'>Results</h2>
-      <div><Link to="/Results/add" className="link">Add New</Link></div>
-      <table className='results'>
+    <Container className="containerTeams">
+      <h2 className='h2'>Results</h2>
+      <Button href="/Results/add">Add New</Button>
+      <Table className="table" striped bordered hover variant="dark">
         <thead>
           <tr>
             <th>№</th>
@@ -26,14 +25,14 @@ const Results = () => {
             <th>Away Goals</th>
             <th>Away Team</th>
             <th>Venue</th>
-            <th>Actions</th>
+            <th >Actions</th>
           </tr>
         </thead>
         <tbody>
           {results.map((result, index) => (
             <tr key={result.id}>
               <td>{index + 1}.</td>
-              <td>{result.date}</td>
+              <td >{result.date}</td>
               <td style={{
                 color:
                   !!(result.home_goals > result.away_goals) ? "green" :
@@ -57,17 +56,17 @@ const Results = () => {
               <td>{result.venue}</td>
               <td>
                 <ButtonGroup>
-                  <Link to={`/Matches-Statistics/${result.id}`} className='link'>View</Link>
-                  <Link to={`/Results/edit/${result.id}`} className='edit'>Edit</Link>
-                  <Button variant='danger' onClick={() => deleteResult(result.id)}>Delete</Button>
+                  <Button href={`/Matches-Statistics/${result.id}`} >View</Button>
+                  <Button variant="secondary" href={`/Results/edit/${result.id}`}>Edit</Button>
+                  <Button variant="danger" onClick={() => deleteResult(result.id)}>Delete</Button>
                 </ButtonGroup>
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
-      <Link to={'/'} className='link'>Back To Home Page</Link>
-    </div>
+      </Table>
+      <Button href='/'>Back To Home Page</Button>
+    </Container>
   )
 }
 

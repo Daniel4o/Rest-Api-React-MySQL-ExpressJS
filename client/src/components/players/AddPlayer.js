@@ -1,5 +1,4 @@
-import { Form, Spinner } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Form, Spinner, Button } from 'react-bootstrap';
 import { Formik, ErrorMessage } from "formik";
 import useFormAddPlayer from './useFormAddPlayer';
 import './Players.css';
@@ -24,7 +23,7 @@ const AddPlayer = (submitForm) => {
                 {({ values, errors, handleBlur, handleChange, handleSubmit }) => (
                     <Form className="formContainer" onSubmit={handleSubmit}>
                         <Form.Group >
-                            <div><Form.Label>Team Name:</Form.Label></div>
+                           <Form.Label>Team Name:</Form.Label>
                             <ErrorMessage name="team_name" component="span" />
                             <Form.Select
                                 id="inputCreatePlayer"
@@ -39,7 +38,7 @@ const AddPlayer = (submitForm) => {
                             </Form.Select>
                         </Form.Group>
                         <Form.Group >
-                            <div><Form.Label>Name:</Form.Label></div>
+                            <Form.Label>Name:</Form.Label>
                             <ErrorMessage name="name" component="span" />
                             <Form.Control
                                 type="text"
@@ -67,7 +66,7 @@ const AddPlayer = (submitForm) => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <div><Form.Label>Age:</Form.Label></div>
+                            <Form.Label>Age:</Form.Label>
                             <ErrorMessage name="age" component="span" />
                             <Form.Control
                                 autocomplete="off"
@@ -79,8 +78,8 @@ const AddPlayer = (submitForm) => {
                                 isInvalid={!!errors.age}
                             />
                         </Form.Group>
-                        <button type="submit"> Create Player </button>
-                        <Link to={'/players'} className='edit'>Cancel</Link>
+                        <Button variant="success" type="submit"> Create Player </Button>
+                        <Button variant="danger" href='/players' className='edit'>Cancel</Button>
                     </Form>
                 )}
             </Formik>

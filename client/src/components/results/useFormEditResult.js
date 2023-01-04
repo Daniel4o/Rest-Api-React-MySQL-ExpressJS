@@ -78,18 +78,18 @@ const useFormEditResult = () => {
     };
 
     const validationSchema = Yup.object().shape({
-        host_name: Yup.string().oneOf(hostName, 'No such host with this Id!'),
-        guest_name: Yup.string().oneOf(guestName, 'No such guest with this Id!').notOneOf(["Select a Guest"])
+        host_name: Yup.string().required("Host name is required!").oneOf(hostName, 'No such host with this Id!'),
+        guest_name: Yup.string().required("Guest name is required!").oneOf(guestName, 'No such guest with this Id!').notOneOf(["Select a Guest"])
             .when('host_name', (host_name, schema) => {
                 return schema.test({
                     test: guest_name => guest_name !== host_name,
                     message: 'One team cannot play against each other!'
                 })
             }),
-        home_goals: Yup.number("Goals is a number value!").min(0, "Result cannot be negative!").max(50, "Invalid result!"),
-        away_goals: Yup.number("Goals is a number value!").min(0, "Result cannot be negative!").max(50, "Invalid result!"),
-        date: Yup.date().required("Date is required!"),
-        venue: Yup.string().min(3, "Venue must be atlease 3 characters!").max(20, "Venue name too long!")
+        home_goals: Yup.number("Goals is a number value!").min(0, "Result cannot be negative!").max(50, "Invalid result!").required("Home goals field is required!"),
+        away_goals: Yup.number("Goals is a number value!").min(0, "Result cannot be negative!").max(50, "Invalid result!").required("Away goals field is required"),
+        date: Yup.date().required("Date is required!").required("Date is required!"),
+        venue: Yup.string().min(3, "Venue must be atlease 3 characters!").max(20, "Venue name too long!").required("Venue is required!")
     });
 
     const onSubmit = (data) => {
