@@ -2,37 +2,200 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('players', [{
+    return queryInterface.bulkInsert('players', [
+      // Man United
+      {
       teamId: '1',
       name: 'Ronaldo',
-      position: 'Central Forward',
+      position: 'Attacker',
       age: '37'
-    }, {
+    },
+    {
       teamId: '1',
-      name: 'Varane',
-      position: 'Central Back',
+      name: 'Berbatov',
+      position: 'Attacker',
+      age: '40'
+    },
+    {
+      teamId: '1',
+      name: 'Ferdinand',
+      position: 'Defender',
+      age: '36'
+    },
+    {
+      teamId: '1',
+      name: 'Evra',
+      position: 'Defender',
+      age: '37'
+    },
+    {
+      teamId: '1',
+      name: 'Shaw',
+      position: 'Defender',
       age: '29'
-    }, {
-      teamId: '2',
-      name: 'M. Salah',
-      position: 'Wing',
+    },
+    {
+      teamId: '1',
+      name: 'Pogba',
+      position: 'Middfielder',
+      age: '30'
+    },
+    {
+      teamId: '1',
+      name: 'Fernandes',
+      position: 'Middfielder',
       age: '31'
-    }, {
+    },
+    {
+      teamId: '1',
+      name: 'Nani',
+      position: 'Middfielder',
+      age: '38'
+    },
+    {
+      teamId: '1',
+      name: 'Giggs',
+      position: 'Middfielder',
+      age: '45'
+    },
+
+
+    //Liverpool
+
+    {
+      teamId: '2',
+      name: 'Alisson',
+      position: 'Goalkeeper',
+      age: '33'
+    },
+    {
+      teamId: '2',
+      name: 'van Dijk',
+      position: 'Defender',
+      age: '30'
+    },
+    {
+      teamId: '2',
+      name: 'Alexander-Arnold',
+      position: 'Defender',
+      age: '26'
+    },
+    {
+      teamId: '2',
+      name: 'Robertson',
+      position: 'Defender',
+      age: '33'
+    },
+    {
+      teamId: '2',
+      name: 'Konate',
+      position: 'Defender',
+      age: '32'
+    },
+    {
+      teamId: '2',
+      name: 'Tsimikas',
+      position: 'Defender',
+      age: '34'
+    },
+    {
       teamId: '2',
       name: 'Henderson',
-      position: 'Central Middfielder',
+      position: 'Middfielder',
       age: '32'
+    },
+    {
+      teamId: '2',
+      name: 'Elliott',
+      position: 'Middfielder',
+      age: '27'
+    },
+    {
+      teamId: '2',
+      name: 'Fabinho',
+      position: 'Middfielder',
+      age: '32'
+    },
+    {
+      teamId: '2',
+      name: 'Thiago',
+      position: 'Middfielder',
+      age: '34'
+    },
+    {
+      teamId: '2',
+      name: 'M. Salah',
+      position: 'Attacker',
+      age: '32'
+    },
+    {
+      teamId: '2',
+      name: 'Darwin Nunez',
+      position: 'Attacker',
+      age: '28'
+    },
+
+    // Chelsea
+
+    {
+      teamId: '3',
+      name: 'Kepa',
+      position: 'Goalkeeper',
+      age: '28'
     }, {
       teamId: '3',
-      name: 'Lukaku',
-      position: 'Central Forward',
+      name: 'Thiago Silva',
+      position: 'Defender',
+      age: '30'
+    }, {
+      teamId: '3',
+      name: 'Cuccurella',
+      position: 'Defender',
+      age: '28'
+    }, {
+      teamId: '3',
+      name: 'Koulibaly',
+      position: 'Defender',
+      age: '30'
+    }, {
+      teamId: '3',
+      name: 'Azpillicueta',
+      position: 'Defender',
+      age: '34'
+    },
+    {
+      teamId: '3',
+      name: 'Hakim Ziyech',
+      position: 'Middfielder',
+      age: '26'
+    }, {
+      teamId: '3',
+      name: 'Jorginho',
+      position: 'Middfielder',
       age: '29'
     }, {
       teamId: '3',
-      name: 'Kante',
-      position: 'Defensive Middfielder',
-      age: '30'
+      name: 'Pulisic',
+      position: 'Middfielder',
+      age: '23'
     }, {
+      teamId: '3',
+      name: 'Mason Mount',
+      position: 'Middfielder',
+      age: '24'
+    }, {
+      teamId: '3',
+      name: 'Kai Havertz',
+      position: 'Attacker',
+      age: '24'
+    }, {
+      teamId: '3',
+      name: 'Sterling',
+      position: 'Attacker',
+      age: '28'
+    },
+
+    {
       teamId: '4',
       name: 'Kane',
       position: 'Attacker',

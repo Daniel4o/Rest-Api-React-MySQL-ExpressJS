@@ -23,8 +23,7 @@ const AddPlayer = (submitForm) => {
                 {({ values, errors, handleBlur, handleChange, handleSubmit }) => (
                     <Form className="formContainer" onSubmit={handleSubmit}>
                         <Form.Group >
-                           <Form.Label>Team Name:</Form.Label>
-                            <ErrorMessage name="team_name" component="span" />
+                            <Form.Label>Team Name:</Form.Label>
                             <Form.Select
                                 id="inputCreatePlayer"
                                 name="team_name"
@@ -36,6 +35,7 @@ const AddPlayer = (submitForm) => {
                                 <option label='Select Team'></option>
                                 {teamName.map((id) => <option key={id} value={id}>{id}</option>)}
                             </Form.Select>
+                            <ErrorMessage name="team_name" component="span" />
                         </Form.Group>
                         <Form.Group >
                             <Form.Label>Name:</Form.Label>
@@ -52,10 +52,8 @@ const AddPlayer = (submitForm) => {
                             />
                         </Form.Group>
                         <Form.Group >
-                            <div> <Form.Label>Position:</Form.Label></div>
-                            <ErrorMessage name="position" component="span" />
-                            <Form.Control
-                                type="text"
+                            <Form.Label>Position:</Form.Label>
+                            <Form.Select
                                 autocomplete="off"
                                 id="inputCreatePlayer"
                                 name="position"
@@ -63,11 +61,17 @@ const AddPlayer = (submitForm) => {
                                 onBlur={handleBlur}
                                 value={values.position}
                                 isInvalid={!!errors.position}
-                            />
+                            >
+                                <option label="Select Position"></option>
+                                <option value="Goalkeeper">Goalkeeper</option>
+                                <option value="Defender">Defender</option>
+                                <option value="Middfielder">Middfileder</option>
+                                <option value="Attacker">Attacker</option>
+                            </Form.Select>
+                            <ErrorMessage name="position" component="span" />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Age:</Form.Label>
-                            <ErrorMessage name="age" component="span" />
                             <Form.Control
                                 autocomplete="off"
                                 id="inputCreatePlayer"
@@ -77,6 +81,7 @@ const AddPlayer = (submitForm) => {
                                 value={values.age}
                                 isInvalid={!!errors.age}
                             />
+                            <ErrorMessage name="age" component="span" />
                         </Form.Group>
                         <Button variant="success" type="submit"> Create Player </Button>
                         <Button variant="danger" href='/players' className='edit'>Cancel</Button>

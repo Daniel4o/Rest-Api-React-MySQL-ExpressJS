@@ -96,7 +96,7 @@ const useFormEditPlayer = () => {
         team_name: Yup.string().required("Team name is required!"),
         name: Yup.string().required("Name is required!").min(3, "Name should be atleast 3 characters!").max(20, "Name should be maximum 20 characters!")
             .notOneOf(playersName, 'Player with this name already exists!'),
-        position: Yup.string().required("Position field is required!").min(2, "Minimum position value is 2 characters!").max(15, "Maxmimum position value is 10 characters!"),
+        position: Yup.string().required("Position field is required!"),
         age: Yup.number("Age is a number value!").required("Age is required!").min(15, "Player should be atleast 15 years of age!").max(45, "Player is too old, maximum age is 45!")
     });
 

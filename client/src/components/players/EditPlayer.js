@@ -26,7 +26,6 @@ const EditPlayer = (submitForm) => {
                     <Form className="formContainer" onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Label>Team Name:</Form.Label>
-                            <ErrorMessage name="team_name" component="span" />
                             <Form.Select
                                 id="inputCreatePlayer"
                                 name="team_name"
@@ -38,10 +37,10 @@ const EditPlayer = (submitForm) => {
                                 <option label='Select Team'></option>
                                 {teamName.map((id) => <option key={id} value={id}>{id}</option>)}
                             </Form.Select>
+                            <ErrorMessage name="team_name" component="span" />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Name:</Form.Label>
-                            <ErrorMessage name="name" component="span" />
                             <Form.Control
                                 type="text"
                                 autocomplete="off"
@@ -52,11 +51,11 @@ const EditPlayer = (submitForm) => {
                                 value={values.name}
                                 isInvalid={!!errors.name}
                             />
+                            <ErrorMessage name="name" component="span" />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Position:</Form.Label>
-                            <ErrorMessage name="position" component="span" />
-                            <Form.Control
+                            <Form.Select
                                 autocomplete="off"
                                 id="inputCreatePlayer"
                                 name="position"
@@ -64,7 +63,14 @@ const EditPlayer = (submitForm) => {
                                 onBlur={handleBlur}
                                 value={values.position}
                                 isInvalid={!!errors.position}
-                            />
+                            >
+                                <option label="Select Position"></option>
+                                <option value="Goalkeeper">Goalkeeper</option>
+                                <option value="Defender">Defender</option>
+                                <option value="Middfielder">Middfileder</option>
+                                <option value="Attacker">Attacker</option>
+                            </Form.Select>
+                            <ErrorMessage name="position" component="span" />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Age:</Form.Label>

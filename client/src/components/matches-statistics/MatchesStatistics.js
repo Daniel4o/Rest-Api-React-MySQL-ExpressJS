@@ -19,21 +19,20 @@ const MatchesStatistics = () => {
 
   return (
     <Container id="add" className="content">
-      <Nav style={{width:"1200px"}} variant="tabs" defaultActiveKey={'/matches-statistics/' + id}>
+      <Nav id="nav" variant="tabs" defaultActiveKey={'/matches-statistics/' + id}>
         <Nav.Item>
           <Nav.Link href={'/matches-statistics/' + id}>Match Statistics</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-1">View Lineups</Nav.Link>
+          <Nav.Link href={"/matches-statistics/line-ups/" + id}>View Lineups</Nav.Link>
         </Nav.Item>
         <Container>
           <Table id="table" className='text-white bg-dark'>
-    
             <thead >
-            <Row className="finalResult">
+              <Row className="finalResult">
                 {teamNames[0]}&ensp;{finalResult}&ensp;{teamNames[1]}
               </Row>
-            </thead>  
+            </thead>
             <thead>
               <tr>
                 <th>Minute</th>
@@ -66,12 +65,10 @@ const MatchesStatistics = () => {
           </Table>
         </Container>
       </Nav>
- 
       <ButtonGroup id="buttonGroup">
         <Button href={"/matches-statistics/add/" + id} className="btn btn-outline-light">Add New</Button>
         <Button variant="secondary" href="/results" id="backButton" className="btn btn-outline-light">Back to Results</Button>
       </ButtonGroup>
-  
     </Container>
   )
 }
