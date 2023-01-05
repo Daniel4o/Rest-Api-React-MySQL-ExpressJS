@@ -1,12 +1,21 @@
 .App {
-    font-family: sans-serif;
-    text-align: center;
-  }
+  font-family: sans-serif;
+  text-align: center;
+}
 
-  .lineUps {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
+.lineUps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+
+.finalResultFormations {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  width: 1225px;
+}

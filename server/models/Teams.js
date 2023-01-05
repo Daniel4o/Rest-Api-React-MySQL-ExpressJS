@@ -8,6 +8,12 @@ const team = (sequelize, DataTypes) => {
                 notNull: { msg: "You need to provide team name" }
             }
         },
+        formation: {
+            type: DataTypes.STRING(), allowNull: false,
+            validate: {
+                notNull: { msg: "You need to provide formation for the team!" }
+            }
+        }
     },
         {
             timestamps: true,

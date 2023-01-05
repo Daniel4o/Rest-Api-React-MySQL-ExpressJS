@@ -17,17 +17,23 @@ module.exports = {
           notNull: { msg: "You need to provide team name" }
         }
       },
+      formation: {
+        type: Sequelize.STRING, allowNull: false,
+        validate: {
+          notNull: { msg: "You need to provide formation for the team!" }
+        }
+      },
       createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    },
-    updatedAt: {
+      },
+      updatedAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
-    },
-    deletedAt: {
-      type: Sequelize.DATE
-  },
+      },
+      deletedAt: {
+        type: Sequelize.DATE
+      },
     },
       {
         uniqueKeys: {

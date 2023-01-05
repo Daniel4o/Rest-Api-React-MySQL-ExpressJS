@@ -39,7 +39,7 @@ exports.getTeamById = async (req, res) => {
                 as: "awayTeam",
             }]
         })
-        const allTeamNames = await Team.findAll({attributes:["team_name", "id"]})
+        const allTeamNames = await Team.findAll({ attributes: ["team_name", "id"] })
 
         const teamPlayers = await Team.findAll({
             where: { id: req.params.id },
@@ -50,12 +50,19 @@ exports.getTeamById = async (req, res) => {
                 as: "players"
             }]
         })
-        const awayResultHostId = awayResults.map(teamId=>teamId['awayTeam.host_id'])
-        const homeResultGuestId = homeResults.map(teamId=>teamId['homeTeam.guest_id'])
-        const hostTeamName = allTeamNames.filter(team=> awayResultHostId.includes(team.id))
-        const guestTeamName = allTeamNames.filter(team=> homeResultGuestId.includes(team.id))
+        const awayResultHostId = awayResults.map(teamId => teamId['awayTeam.host_id']);
+        const homeResultGuestId = homeResults.map(teamId => teamId['homeTeam.guest_id']);
+        const hostTeamName = allTeamNames.filter(team => awayResultHostId.includes(team.id));
+        const guestTeamName = allTeamNames.filter(team => homeResultGuestId.includes(team.id));
 
-        return res.send({ homeResults, awayResults, teamPlayers, hostTeamName, guestTeamName })
+        const formation = await Team.findAll({
+            where: { id: req.params.id },
+            raw: true,
+            attributes: ["formation"]
+        });
+
+        return res.send({ homeResults, awayResults, teamPlayers, hostTeamName, guestTeamName, formation })
+
     } catch (error) {
         return res.send(error)
     }

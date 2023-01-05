@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 const useFormAddTeam = () => {
-    const BASE_URL = process.env.REACT_APP_URL
+    const BASE_URL = process.env.REACT_APP_URL;
 
     const navigate = useNavigate();
     const [teams, setTeam] = useState([]);
@@ -16,23 +16,25 @@ const useFormAddTeam = () => {
             return response.json()
                 .then(data => {
                     const team = data.map(team => team.team_name).flat();
-                    setTeam(team)
-                    setError(null)
-                    setIsLoading(false)
+                    setTeam(team);
+                    setError(null);
+                    setIsLoading(false);
                 })
         } catch (error) {
-            setError(error)
-            setIsLoading(false)
+            setError(error);
+            setIsLoading(false);
         }
     }, [BASE_URL]);
 
     const initialValues = {
         team_name: "",
+        formation: "",
     };
 
     const validationSchema = Yup.object().shape({
         team_name: Yup.string().required("Team Name field is required!").min(3, "Team name should be atleast 3 characters!").max(20, "Name is too long, maximum is 20 characters!")
-            .notOneOf(teams, 'Team with this name exists!')
+            .notOneOf(teams, 'Team with this name exists!'),
+        formation: Yup.string().required("You need to select formation for the team!")
     });
 
     const onSubmit = (data) => {
@@ -48,4 +50,4 @@ const useFormAddTeam = () => {
     return { initialValues, validationSchema, error, isLoading, onSubmit }
 }
 
-export default useFormAddTeam
+export default useFormAddTeam;

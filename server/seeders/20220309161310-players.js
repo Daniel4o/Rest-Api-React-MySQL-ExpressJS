@@ -6,6 +6,11 @@ module.exports = {
       // Man United
       {
       teamId: '1',
+      name: 'David de Gea',
+      position: 'Goalkeeper',
+      age: '33'
+    },{
+      teamId: '1',
       name: 'Ronaldo',
       position: 'Attacker',
       age: '37'
@@ -18,9 +23,9 @@ module.exports = {
     },
     {
       teamId: '1',
-      name: 'Ferdinand',
+      name: 'Harry Maguire',
       position: 'Defender',
-      age: '36'
+      age: '31'
     },
     {
       teamId: '1',
@@ -36,6 +41,12 @@ module.exports = {
     },
     {
       teamId: '1',
+      name: 'Wan-Bissaka',
+      position: 'Defender',
+      age: '28'
+    },
+    {
+      teamId: '1',
       name: 'Pogba',
       position: 'Middfielder',
       age: '30'
@@ -48,15 +59,15 @@ module.exports = {
     },
     {
       teamId: '1',
-      name: 'Nani',
+      name: 'Christian Eriksen',
       position: 'Middfielder',
-      age: '38'
+      age: '34'
     },
     {
       teamId: '1',
-      name: 'Giggs',
+      name: 'Casemiro',
       position: 'Middfielder',
-      age: '45'
+      age: '30'
     },
 
 

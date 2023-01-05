@@ -17,12 +17,13 @@ const useFormLineUps = () => {
         try {
             const response = await fetch(`${BASE_URL}/results/${id}`);
             return response.json().then(data => {
-              console.log(data)
                 setTeamNames([data.result["host.team_name"], data.result["guest.team_name"]]);
                 setHomePlayers(data.players.filter(player=>player.teamId == data.result["host_id"]));
                 setAwayPlayers(data.players.filter(player=>player.teamId == data.result["guest_id"]));        
-                
                 setFinalResult(data.result["home_goals"] + "-" + data.result["away_goals"]);
+
+                setError(null);
+                setIsLoading(false);
             });
         } catch (error) {
             setError(error);
