@@ -1,7 +1,7 @@
 import useFormLineUps from "./useFormLineUps";
 
 const Formations = () => {
-    const { homePlayers, awayPlayers, finalResult, error, isLoading, id, teamNames } = useFormLineUps();
+    const { homePlayers, awayPlayers, formations, finalResult, error, isLoading, id, teamNames } = useFormLineUps();
 
     const homeGK = homePlayers.filter(player => player.position == "Goalkeeper").map(player => player.name);
     const homeDF = homePlayers.filter(player => player.position == "Defender").map(player => player.name);
@@ -13,52 +13,230 @@ const Formations = () => {
     const awayMD = awayPlayers.filter(player => player.position == "Middfielder").map(player => player.name);
     const awayATT = awayPlayers.filter(player => player.position == "Attacker").map(player => player.name);
 
-    const homeTeam = () => {
-        return {
-            squad: {
-                gk: { number: 1, name: homeGK[0] },
-                df: [
-                    { number: 2, name: homeDF[0] },
-                    { number: 3, name: homeDF[1] },
-                    { number: 4, name: homeDF[2] },
-                    { number: 5, name: homeDF[3] }
-                ],
-                cam: [
-                    { number: 6, name: homeMD[0] },
-                    { number: 7, name: homeMD[1] },
-                    { number: 8, name: homeMD[2] },
-                    { number: 9, name: homeMD[3] },
-                ],
-                fw: [{ number: 10, name: homeATT[0] }, { number: 11, name: homeATT[1] }],
-            }
+    const formationsTeams = (formation, players) => {
+
+        switch (formation) {
+            case "4-4-2":
+                return {
+                    squad: {
+                        gk: { number: 1, name: players[0] },
+                        df: [
+                            { number: 2, name: players[1] },
+                            { number: 3, name: players[2] },
+                            { number: 4, name: players[3] },
+                            { number: 5, name: players[4] }
+                        ],
+                        cm: [
+                            { number: 6, name: players[5] },
+                            { number: 7, name: players[6] },
+                            { number: 8, name: players[7] },
+                            { number: 9, name: players[8] },
+                        ],
+                        fw: [{ number: 10, name: players[9] }, { number: 11, name: players[10] }],
+                    }
+                }
+
+            case "4-5-1":
+                return {
+                    squad: {
+                        gk: { number: 1, name: players[0] },
+                        df: [
+                            { number: 2, name: players[1] },
+                            { number: 3, name: players[2] },
+                            { number: 4, name: players[3] },
+                            { number: 5, name: players[4] }
+                        ],
+                        cm: [
+                            { number: 6, name: players[5] },
+                            { number: 7, name: players[6] },
+                            { number: 8, name: players[7] },
+                        ],
+                        cam: [
+                            { number: 9, name: players[8] },
+                            { number: 10, name: players[9] }
+                        ],
+                        fw: [{ number: 11, name: players[10] }],
+                    }
+                }
+
+            case "4-3-3":
+                return {
+                    squad: {
+                        gk: { number: 1, name: players[0] },
+                        df: [
+                            { number: 2, name: players[1] },
+                            { number: 3, name: players[2] },
+                            { number: 4, name: players[3] },
+                            { number: 5, name: players[4] }
+                        ],
+                        cm: [
+                            { number: 6, name: players[5] },
+                            { number: 7, name: players[6] },
+                            { number: 8, name: players[7] },
+                        ],
+                        fw: [
+                            { number: 9, name: players[8] },
+                            { number: 10, name: players[9] },
+                            { number: 11, name: players[10] }],
+                    }
+                }
+
+            case "4-2-3-1":
+                return {
+                    squad: {
+                        gk: { number: 1, name: players[0] },
+                        df: [
+                            { number: 2, name: players[1] },
+                            { number: 3, name: players[2] },
+                            { number: 4, name: players[3] },
+                            { number: 5, name: players[4] }
+                        ],
+                        cdm: [
+                            { number: 6, name: players[5] },
+                            { number: 7, name: players[6] },
+                        ],
+                        cam: [
+                            { number: 8, name: players[7] },
+                            { number: 9, name: players[8] },
+                            { number: 10, name: players[9] }
+                        ],
+                        fw: [{ number: 11, name: players[10] }],
+                    }
+                }
+
+            case "3-5-2":
+                return {
+                    squad: {
+                        gk: { number: 1, name: players[0] },
+                        df: [
+                            { number: 2, name: players[1] },
+                            { number: 3, name: players[2] },
+                            { number: 4, name: players[3] },
+                        ],
+                        cdm: [
+                            { number: 5, name: players[4] },
+                            { number: 6, name: players[5] },
+                        ],
+                        cm: [
+                            { number: 7, name: players[6] },
+                            { number: 8, name: players[7] },
+                            { number: 9, name: players[8] },
+                        ],
+                        fw: [
+                            { number: 10, name: players[9] },
+                            { number: 11, name: players[10] }
+                        ],
+                    }
+                }
+
+            case "4-1-4-1":
+                return {
+                    squad: {
+                        gk: { number: 1, name: players[0] },
+                        df: [
+                            { number: 2, name: players[1] },
+                            { number: 3, name: players[2] },
+                            { number: 4, name: players[3] },
+                            { number: 5, name: players[4] }
+                        ],
+                        cdm: [
+                            { number: 6, name: players[5] },
+                        ],
+                        cm: [
+                            { number: 7, name: players[6] },
+                            { number: 8, name: players[7] },
+                            { number: 9, name: players[8] },
+                            { number: 10, name: players[9] }
+                        ],
+                        fw: [{ number: 11, name: players[10] }],
+                    }
+                }
+
+            case "4-4-1-1":
+                return {
+                    squad: {
+                        gk: { number: 1, name: players[0] },
+                        df: [
+                            { number: 2, name: players[1] },
+                            { number: 3, name: players[2] },
+                            { number: 4, name: players[3] },
+                            { number: 5, name: players[4] }
+                        ],
+                        cm: [
+                            { number: 6, name: players[5] },
+                            { number: 7, name: players[6] },
+                            { number: 8, name: players[7] },
+                            { number: 9, name: players[8] },
+                        ],
+                        cam: [
+                            { number: 10, name: players[9] }
+                        ],
+                        fw: [{ number: 11, name: players[10] }],
+                    }
+                }
+
+            case "3-4-3":
+                return {
+                    squad: {
+                        gk: { number: 1, name: players[0] },
+                        df: [
+                            { number: 2, name: players[1] },
+                            { number: 3, name: players[2] },
+                            { number: 4, name: players[3] },
+                        ],
+                        cm: [
+                            { number: 5, name: players[4] },
+                            { number: 6, name: players[5] },
+                            { number: 7, name: players[6] },
+                            { number: 8, name: players[7] },
+                        ],
+                        fw: [
+                            { number: 9, name: players[8] },
+                            { number: 10, name: players[9] },
+                            { number: 11, name: players[10] }
+                        ],
+                    }
+                }
+
+            case "3-5-1-1":
+                return {
+                    squad: {
+                        gk: { number: 1, name: players[0] },
+                        df: [
+                            { number: 2, name: players[1] },
+                            { number: 3, name: players[2] },
+                            { number: 4, name: players[3] },
+                        ],
+                        cdm: [
+                            { number: 5, name: players[4] },
+                            { number: 6, name: players[5] },
+                        ],
+                        cm: [
+                            { number: 7, name: players[6] },
+                        ],
+                        cam: [
+                            { number: 8, name: players[7] },
+                            { number: 9, name: players[8] },
+                            { number: 10, name: players[9] },
+                        ],
+                        fw: [
+                            { number: 11, name: players[10] }
+                        ],
+                    }
+                }
         }
+    }
+    
+    const homeTeam = () => {
+        return formationsTeams(formations.hostFormation, [...homeGK, ...homeDF, ...homeMD, ...homeATT]);
+
     };
 
     const awayTeam = () => {
-        return {
-            squad: {
-                gk: { number: 1, name: awayGK[0] },
-                df: [
-                    { number: 2, name: awayDF[0] },
-                    { number: 3, name: awayDF[1] },
-                    { number: 4, name: awayDF[2] },
-                    { number: 5, name: awayDF[3] },
-                ],
-                cam: [
-                    { number: 6, name: awayMD[0] },
-                    { number: 7, name: awayMD[1] },
-                    { number: 8, name: awayMD[2] },
-                    { number: 9, name: awayMD[3] }
-                ],
-                fw: [
-                    { number: 10, name: awayATT[0] },
-                    { number: 11, name: awayATT[1] }
-                ],
-            }
-        }
-    };
+        return formationsTeams(formations.guestFormation, [...awayGK, ...awayDF, ...awayMD, ...awayATT]);
+    }
 
-    return { homeTeam, awayTeam, finalResult, error, isLoading, id, teamNames };
+    return { homeTeam, awayTeam, formations, finalResult, error, isLoading, id, teamNames };
 
 }
 

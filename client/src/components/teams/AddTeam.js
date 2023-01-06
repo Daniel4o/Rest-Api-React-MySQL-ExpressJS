@@ -51,6 +51,10 @@ const AddTeam = (submitForm) => {
                                 <option value="4-3-3">4-3-3</option>
                                 <option value="3-5-2">3-5-2</option>
                                 <option value="4-2-2-3-1">4-2-3-1</option>
+                                <option value="4-1-4-1">4-1-4-1</option>
+                                <option value="4-4-1-1">4-4-1-1</option>
+                                <option value="3-4-3">3-4-3</option>
+                                <option value="3-5-1-1">3-5-1-1</option>
                             </Form.Select>
                             <ErrorMessage name="formation" component="span" />
                             <ButtonGroup className='buttonGroupTeams'>

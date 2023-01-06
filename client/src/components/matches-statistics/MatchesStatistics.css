@@ -7,19 +7,19 @@
 }
 
 .content {
-  height:100vh;
+  min-height: 100vh;
   margin-top: 20px;
 }
 
 #buttonGroup {
   align-items: center;
   justify-content: center;
-  display:grid;
-  margin-right:150px;
+  display: grid;
+  margin-right: 150px;
 }
 
-#backButton{
-  right:0;
+#backButton {
+  right: 0;
 }
 
 .finalResult {
@@ -66,7 +66,5 @@ span {
 }
 
 #nav {
-  width:1200px;
+  width: 1200px;
 }
-
-

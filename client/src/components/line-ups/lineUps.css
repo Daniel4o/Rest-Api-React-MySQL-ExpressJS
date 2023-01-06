@@ -4,18 +4,29 @@
 }
 
 .lineUps {
-  display: flex;
+  display: inline-block;
   justify-content: center;
-  align-items: center;
   min-height: 100vh;
 }
-
 
 .finalResultFormations {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 50px;
   margin-bottom: 40px;
-  width: 1225px;
+
+}
+
+.contentLineUps {
+  min-height: 100vh;
+  margin-top: 20px;
+}
+
+.flexContainer {
+  display: flex;
+}
+
+.flexContainer>h3 {
+  flex: 1
 }
