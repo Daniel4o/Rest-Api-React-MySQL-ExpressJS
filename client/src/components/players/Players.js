@@ -1,19 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Players.css';
-import { Spinner, Button, ButtonGroup, Container, Table } from 'react-bootstrap';
+import { Button, ButtonGroup, Container, Table } from 'react-bootstrap';
+import Loading from '../loading/loading';
 import useFormPlayers from './useFormPlayers';
 
 const Players = () => {
   const { players, paranoidTeams, error, isLoading, deletePlayer } = useFormPlayers()
 
-  console.log(paranoidTeams.length == 0)
-  if (isLoading) {
-    return (<Spinner animation="border" variant="primary" />)
-  }
-  if (error) {
-    return <div>There was an error: {error}</div>
-  }
+  if (isLoading || error != null) {
+    return Loading(isLoading, error);
+}
 
   return (
     <Container>

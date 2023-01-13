@@ -8,14 +8,13 @@
 
 .content {
   min-height: 100vh;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 #buttonGroup {
   align-items: center;
   justify-content: center;
   display: grid;
-  margin-right: 150px;
 }
 
 #backButton {
@@ -23,12 +22,9 @@
 }
 
 .finalResult {
-  display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  margin-bottom: 40px;
-
+  display: inline;
 }
 
 .addMatchStatistic {
@@ -61,10 +57,22 @@
   font-size: 20px;
 }
 
+.statisticsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 span {
   color: red;
 }
 
 #nav {
   width: 1200px;
+}
+
+.navi {
+  align-items: center;
+  justify-content: center;
 }

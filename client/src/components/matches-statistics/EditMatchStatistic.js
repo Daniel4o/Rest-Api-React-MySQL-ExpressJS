@@ -1,6 +1,7 @@
-import { Form, Spinner, Button } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { Formik, ErrorMessage } from 'formik';
 import useFormEditMatchStatistic from './useFormEditMatchStatistic';
+import Loading from '../loading/loading';
 import './MatchesStatistics.css';
 import { useState, useEffect } from 'react';
 
@@ -14,11 +15,8 @@ const EditMatchStatistic = (submitForm) => {
         setPlayerSelected(initialValues.player_name);
     }, [initialValues.team_name, initialValues.player_name]);
 
-    if (isLoading) {
-        return (<Spinner animation="border" variant="primary" />)
-    }
-    if (error) {
-        return <div>There was an error: {error}</div>
+    if (isLoading || error != null) {
+        return Loading(isLoading, error);
     }
 
     return (

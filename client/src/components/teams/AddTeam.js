@@ -1,16 +1,14 @@
 import { Formik, ErrorMessage } from "formik";
 import './Teams.css';
-import { Form, Spinner, Button, ButtonGroup } from 'react-bootstrap'
+import { Form, Button, ButtonGroup, Container } from 'react-bootstrap';
+import Loading from "../loading/loading";
 import useFormAddTeam from './useFormAddTeam';
 
 const AddTeam = (submitForm) => {
     const { initialValues, validationSchema, error, isLoading, onSubmit } = useFormAddTeam(submitForm);
 
-    if (isLoading) {
-        return (<Spinner animation="border" variant="primary" />)
-    }
-    if (error) {
-        return <div>There was an error: {error}</div>
+    if (isLoading || error != null) {
+        return Loading(isLoading, error);
     }
 
     return (

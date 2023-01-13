@@ -5,8 +5,7 @@
 
 .lineUps {
   display: inline-block;
-  justify-content: center;
-  min-height: 100vh;
+  width:1000px;
 }
 
 .finalResultFormations {
@@ -18,15 +17,23 @@
 
 }
 
-.contentLineUps {
-  min-height: 100vh;
-  margin-top: 20px;
-}
-
 .flexContainer {
   display: flex;
 }
 
 .flexContainer>h3 {
-  flex: 1
+  flex: 1;
+  align-items: center;
+  display:flex;
+  justify-content:center
+}
+
+.cardLineUps {
+ color:black
+}
+
+.field {
+  display: flex;
+  justify-content: center;
+  align-items: center
 }

@@ -1,17 +1,14 @@
-import { Form, Spinner, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { Formik, ErrorMessage } from "formik";
-import * as Yup from 'yup';
 import useFormEditPlayer from './useFormEditPlayer';
+import Loading from '../loading/loading';
 import './Players.css';
 
 const EditPlayer = (submitForm) => {
     const { initialValues, validationSchema, onSubmit, error, isLoading, teamName } = useFormEditPlayer(submitForm)
 
-    if (isLoading) {
-        return (<Spinner animation="border" variant="primary" />)
-    }
-    if (error) {
-        return <div>There was an error: {error}</div>
+    if (isLoading || error != null) {
+        return Loading(isLoading, error);
     }
 
     return (

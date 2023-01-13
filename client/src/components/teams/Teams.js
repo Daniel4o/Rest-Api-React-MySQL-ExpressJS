@@ -1,15 +1,13 @@
-import { Button, ButtonGroup, Spinner, Container, Table } from "react-bootstrap";
+import { Button, ButtonGroup, Container, Table } from "react-bootstrap";
 import useFormTeams from './useFormTeams'
+import Loading from "../loading/loading";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Teams = () => {
     const { teams, error, deleteTeam, isLoading } = useFormTeams();
 
-    if (isLoading) {
-        return (<Spinner animation="border" variant="primary" />)
-    }
-    if (error) {
-        return <div>There was an error: {error}</div>
+    if (isLoading || error != null) {
+        return Loading(isLoading, error);
     }
 
     return (
@@ -38,7 +36,7 @@ const Teams = () => {
                             </td>
                         </tr>
                     ))}
-                </tbody>     
+                </tbody>
             </Table>
             <Button href='/'>Back To Home Page</Button>
         </Container>

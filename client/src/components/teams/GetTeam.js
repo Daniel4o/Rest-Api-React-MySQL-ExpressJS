@@ -1,14 +1,12 @@
-import { Spinner, Table, Button, Container, ButtonGroup } from 'react-bootstrap';
+import { Table, Button, Container, ButtonGroup } from 'react-bootstrap';
 import useFormGetTeam from './useFormGetTeam';
+import Loading from '../loading/loading';
 
 const Team = () => {
     const { team, homeResults, awayResults, players, error, isLoading } = useFormGetTeam();
 
-    if (isLoading) {
-        return (<Spinner animation="border" variant="primary" />)
-    }
-    if (error) {
-        return <div>There was an error: {error}</div>
+    if (isLoading || error != null) {
+        return Loading(isLoading, error);
     }
 
     return (

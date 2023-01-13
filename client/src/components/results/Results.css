@@ -50,3 +50,9 @@
   width:1000px;
   margin-left:40px;
 }
+
+.center {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+}

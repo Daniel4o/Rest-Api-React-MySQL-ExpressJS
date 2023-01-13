@@ -1,16 +1,14 @@
-import { Form, Spinner, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { Formik, ErrorMessage } from "formik";
 import useFormEditResult from './useFormEditResult';
+import Loading from '../loading/loading';
 import './Results.css';
 
 const EditResult = (submitForm) => {
     const { validationSchema, initialValues, error, isLoading, hostName, guestName, onSubmit } = useFormEditResult(submitForm);
 
-    if (isLoading) {
-        return (<Spinner animation="border" variant="primary" />)
-    }
-    if (error) {
-        return <div>There was an error: {error}</div>
+    if (isLoading || error != null) {
+        return Loading(isLoading, error);
     }
 
     return (

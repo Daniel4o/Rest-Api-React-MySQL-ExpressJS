@@ -1,14 +1,12 @@
-import { Spinner, Button, ButtonGroup, Container, Table } from "react-bootstrap";
+import { Button, ButtonGroup, Container, Table } from "react-bootstrap";
 import useFormResults from './useFormResults';
+import Loading from "../loading/loading";
 
 const Results = () => {
   const { results, isLoading, error, deleteResult } = useFormResults();
 
-  if (isLoading) {
-    return (<Spinner animation="border" variant="primary" />)
-  }
-  if (error) {
-    return <div>There was an error: {error}</div>
+  if (isLoading || error != null) {
+  return Loading(isLoading,error);
   }
 
   return (

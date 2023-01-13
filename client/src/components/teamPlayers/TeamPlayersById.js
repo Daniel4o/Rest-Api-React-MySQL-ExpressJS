@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
 import useFormTeamPlayersById from './useFormTeamPlayersById';
-import { Spinner, Container, Table, Button, ButtonGroup } from 'react-bootstrap';
+import Loading from '../loading/loading';
+import {  Container, Table, Button, ButtonGroup } from 'react-bootstrap';
 
 const TeamPlayersById = () => {
     const { teamPlayersById, error, isLoading } = useFormTeamPlayersById();
 
-    if (isLoading) {
-        return (<Spinner animation="border" variant="primary" />)
-    }
-    if (error) {
-        return <div>There was an error: {error}</div>
+    if (isLoading || error != null) {
+        return Loading(isLoading, error);
     }
 
     return (

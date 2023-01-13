@@ -1,11 +1,11 @@
 import './layout/Layout.css'
-import { Carousel } from "react-bootstrap"
+import { Carousel, Container } from "react-bootstrap"
 import IMAGES from './images/images'
 
 const HomePage = () => {
     return (
-        <div>
-            <Carousel style={{ "margin-top": "8px" }} >
+        <Container className="content">
+            <Carousel>
                 <Carousel.Item interval={5000}>
                     <img
                         className="d-block w-100"
@@ -58,7 +58,7 @@ const HomePage = () => {
                     <h2 />&ensp; If you delete a team with players, the players will be moved into the Free Transfers table which you can &ensp; edit them or delete them if you desire.
                 </div>
             </div>
-        </div>
+        </Container>
     )
 }
 
