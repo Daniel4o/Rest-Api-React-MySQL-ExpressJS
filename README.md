@@ -1,6 +1,6 @@
-# REST API using Node.js, Express, MySQL and Sequelize and React.js
+# REST API Football League using Node.js, Express, MySQL and Sequelize and React.js
 This project is football league, C.R.U.D project which contains:
-teams, players, team-players and results.
+teams, players, results, match statistics and line-ups.
 
 ## Directory Structure
 - -server/
@@ -34,6 +34,7 @@ teams, players, team-players and results.
 &nbsp; &nbsp; How form submission is handled.  
 **-Yup**: Schema builder for value parsing and validation. Define a schema, transform a value to match, validate the shape of an existing value, or both. Yup schema is extremely expressive and allows modelling complex, interdependent validations, or value transformations.  
 **-React Router** : It enables the navigation among views of various components in a React Application, allows changing the browser URL, and keeps the UI in sync with the URL.  
+**-React-Soccer-LineUp** : A soccer pitch representation component for React.
 **-Dotenv** : Zero-dependency module that loads environment variables from a .env file into process.env.   
 
  
